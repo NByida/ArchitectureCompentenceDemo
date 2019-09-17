@@ -13,7 +13,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory
  *2019/7/1 0001
  **/
 object ServiceCreator {
-    private const val BASE_URL = "http://192.168.1.75/"
+    private const val BASE_URL = "http://192.168.31.67/"
 
 
     var httpLoggingInterceptor= HttpLoggingInterceptor()

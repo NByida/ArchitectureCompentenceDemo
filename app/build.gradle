@@ -17,7 +17,7 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -29,7 +29,10 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    packagingOptions {exclude 'META-INF/rxjava.properties'}
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+
+    }
 }
 
 dependencies {
@@ -56,6 +59,10 @@ dependencies {
 
     implementation 'androidx.appcompat:appcompat:1.1.0-alpha02'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha3'
+
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-18'
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
+
 
 
 }
