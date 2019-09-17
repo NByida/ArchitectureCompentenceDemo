@@ -6,7 +6,7 @@
     <data>
         <variable name="user" type="com.gmail.xuyimin1994.architecturecompentencedemo.User"/>
     </data>
-    <android.support.constraint.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -32,7 +32,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginBottom="8dp"
-            bind:loadBingPic="@{user.pic}"
+
             app:layout_constraintBottom_toTopOf="@+id/textView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -40,5 +40,5 @@
             tools:srcCompat="@tools:sample/avatars" />
 
 
-    </android.support.constraint.ConstraintLayout>
+    </LinearLayout>
 </layout>

@@ -1,19 +1,17 @@
 package com.gmail.xuyimin1994.architecturecompentencedemo
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.databinding.DataBindingUtil
 import android.util.Log
 
 import com.gmail.xuyimin1994.architecturecompentencedemo.databinding.ActivityMainBinding
-import rx.Observable
-import rx.android.schedulers.AndroidSchedulers
 
-import java.util.concurrent.TimeUnit
-import android.R.attr.name
-import android.databinding.ObservableField
-
-
+import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ObservableField
+import androidx.lifecycle.ViewModelProviders
+import com.gmail.xuyimin1994.architecturecompentencedemo.net.PoertyNet
+import io.reactivex.schedulers.Schedulers
+import io.reactivex.android.schedulers.AndroidSchedulers
 
 
 class MainActivity : AppCompatActivity() {
@@ -21,14 +19,18 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+//        val viewModel = ViewModelProviders.of(this)).get(PoetryViewModel::class.java)
+
+
         var binding:ActivityMainBinding   = DataBindingUtil.setContentView(this, R.layout.activity_main)
         val user = User(ObservableField("111"),ObservableField("https://i0.hdslb.com/bfs/live/room_cover/8df838340ec6c09b42e915a0d9eddbede897e3ad.jpg@320w_200h.webp"))
         binding.user=user
-        Observable.interval(0, 1, TimeUnit.SECONDS)
-                .subscribeOn(AndroidSchedulers.mainThread())
+        PoertyNet.getInstance().fetchAllPoetry(1)
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe {_->kotlin.run {
-                    user.name.set(System.currentTimeMillis().toString())
-                }}
+                .subscribe({ response -> user.name.set(response.list?.get(0)?.content)},{t->Log.e("onFailure", t.message)})
+
+
     }
 }
