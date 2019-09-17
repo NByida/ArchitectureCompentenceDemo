@@ -1,6 +1,7 @@
 package com.gmail.xuyimin1994.architecturecompentencedemo.ui
 
 import android.content.Intent
+import android.graphics.Typeface
 import android.os.Bundle
 import android.text.Html
 import android.widget.TextView
@@ -32,12 +33,23 @@ class PoetryDetailActivity:AppCompatActivity() {
 
 
         title.setText(Html.fromHtml(poetry.name?.replace("</p> <p>","<br>")))
-        name.setText(Html.fromHtml(poetry.poet?.replace("</p> <p>","<br>")))
+        name.setText(Html.fromHtml(poetry.dynasty+"."+poetry.poet?.replace("</p> <p>","<br>")))
         context.setText(Html.fromHtml(poetry.content?.replace("</p> <p>","<br>")))
         fanyi.setText(Html.fromHtml(poetry.translate?.replace("</p> <p>","<br>")))
         zhushi.setText(Html.fromHtml(poetry.notes?.replace("</p> <p>","<br>")))
         pinyin.setText(Html.fromHtml(poetry.pinyin?.replace("</p> <p>","<br>")))
         shangxi.setText(Html.fromHtml(poetry.appreciation?.replace("</p> <p>","<br>")))
+        val typeFaceHold = Typeface.createFromAsset(getAssets(), "fonts/xing_kai.ttf")
+        title.setTypeface(typeFaceHold)
+        name.setTypeface(typeFaceHold)
+        context.setTypeface(typeFaceHold)
+        fanyi.setTypeface(typeFaceHold)
+        zhushi.setTypeface(typeFaceHold)
+        pinyin.setTypeface(typeFaceHold)
+        shangxi.setTypeface(typeFaceHold)
+
+
+
 
 
 

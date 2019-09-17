@@ -46,13 +46,51 @@
                 android:layout_marginLeft="5dp"
                 />
 
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="15dp"
+                android:src="#999999"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                />
+
             <TextView
-                android:id="@+id/fanyi"
                 android:textSize="15sp"
                 android:layout_width="match_parent"
                 android:gravity="center"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
+                android:text="翻译"
+                />
+
+            <TextView
+                android:id="@+id/fanyi"
+                android:textSize="15sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="15dp"
+                android:src="#999999"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                />
+
+            <TextView
+                android:textSize="15sp"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="注释"
                 />
 
 
@@ -60,25 +98,60 @@
                 android:id="@+id/zhushi"
                 android:textSize="15sp"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="15dp"
+                android:src="#999999"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                />
+
+            <TextView
+                android:textSize="15sp"
+                android:layout_width="match_parent"
                 android:gravity="center"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
+                android:text="赏析"
                 />
 
             <TextView
                 android:id="@+id/shangxi"
                 android:textSize="15sp"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="15dp"
+                android:src="#999999"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                />
+
+            <TextView
+                android:textSize="15sp"
+                android:layout_width="match_parent"
                 android:gravity="center"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
+                android:text="拼音"
                 />
 
             <TextView
                 android:id="@+id/pinyin"
                 android:textSize="15sp"
                 android:layout_width="match_parent"
-                android:gravity="center"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 />
