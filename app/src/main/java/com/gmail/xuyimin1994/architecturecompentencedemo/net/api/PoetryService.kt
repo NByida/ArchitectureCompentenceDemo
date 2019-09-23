@@ -15,4 +15,5 @@ import retrofit2.http.Path
 interface PoetryService {
     @GET("all/{index}")
     fun getPoetry(@Path("index") index: Int): Observable<BaseBean>
+
 }

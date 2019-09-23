@@ -1,6 +1,7 @@
 package com.gmail.xuyimin1994.architecturecompentencedemo.net
 
 import com.gmail.xuyimin1994.architecturecompentencedemo.entity.BaseBean
+import com.gmail.xuyimin1994.architecturecompentencedemo.net.api.AddressService
 import com.gmail.xuyimin1994.architecturecompentencedemo.net.api.PoetryService
 import io.reactivex.Observable
 
@@ -11,9 +12,17 @@ import io.reactivex.Observable
  **/
 class PoertyNet {
     private val poertyService = ServiceCreator.create(PoetryService::class.java)
+    private val addressService = ServiceCreator.create(AddressService::class.java)
+
+
+
 
     fun fetchAllPoetry(index: Int ): Observable<BaseBean> {
         return poertyService.getPoetry(index)
+    }
+
+    fun getNewAddress(): Observable<String> {
+        return addressService.getAddress()
     }
 
 
