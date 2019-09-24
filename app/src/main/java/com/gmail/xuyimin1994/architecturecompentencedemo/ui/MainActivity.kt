@@ -4,48 +4,46 @@ package com.gmail.xuyimin1994.architecturecompentencedemo.ui
 import android.os.Bundle
 import android.util.Log
 
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.gmail.xuyimin1994.architecturecompentencedemo.R
 import com.gmail.xuyimin1994.architecturecompentencedemo.adapter.PoetryAdapter
 import com.gmail.xuyimin1994.architecturecompentencedemo.entity.Poetry
+import com.gmail.xuyimin1994.architecturecompentencedemo.utils.SharedPreferenceUtil
 import com.gmail.xuyimin1994.architecturecompentencedemo.viewModel.PoetryViewModel
-import com.scwang.smartrefresh.layout.SmartRefreshLayout
+import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : AppCompatActivity() {
-    var page=1;
-    lateinit var adapter:PoetryAdapter;
-    lateinit var refreshLayout:SmartRefreshLayout;
+class MainActivity : RvActivity() {
+
+
+    lateinit var adapter:PoetryAdapter
+    lateinit var viewModel:PoetryViewModel
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        refreshLayout =findViewById(R.id.refresh_layout)
-        var recycleView:RecyclerView=findViewById(R.id.rv_auto)
+        viewModel = ViewModelProviders.of(this).get(PoetryViewModel::class.java)
+        parentCreated()
+        initRv()
+    }
+
+    fun initRv(){
         var manager= LinearLayoutManager(this)
-        recycleView.layoutManager=manager
+        rv_auto.layoutManager=manager
         adapter= PoetryAdapter()
-        adapter.bindToRecyclerView(recycleView)
+        adapter.bindToRecyclerView(rv_auto)
         adapter.onItemClickListener= BaseQuickAdapter.OnItemClickListener { a, v, p ->PoetryDetailActivity.startMe(this@MainActivity, a.getItem(p) as Poetry) }
-        var viewModel = ViewModelProviders.of(this).get(PoetryViewModel::class.java)
+    }
 
-        refreshLayout.setOnRefreshListener {
-            page=1;
-            getWeather(page,viewModel)
+    override fun pullData(page: Int) {
+        getWeather(page,viewModel)
+        if (page==1){
+            getAddress(viewModel)
         }
-
-        refreshLayout.setOnLoadMoreListener {
-            page++;
-            getWeather(page,viewModel)
-        }
-        getWeather(1,viewModel)
-        getAddress(viewModel)
     }
 
     fun getWeather(page:Int,viewModel:PoetryViewModel){
@@ -62,7 +60,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun getAddress(viewModel:PoetryViewModel){
-        viewModel.getAddress()
-                .observe(this, Observer<String>{s-> Log.e("find",s)});
+        viewModel.getAddress().observe(this, Observer<String>{s->
+            SharedPreferenceUtil.getInstance().put(this,"address",s)})
     }
 }

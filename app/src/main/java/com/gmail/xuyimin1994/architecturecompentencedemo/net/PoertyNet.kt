@@ -12,7 +12,7 @@ import io.reactivex.Observable
  **/
 class PoertyNet {
     private val poertyService = ServiceCreator.create(PoetryService::class.java)
-    private val addressService = ServiceCreator.create(AddressService::class.java)
+    private val addressService = ServiceCreator.create4Address(AddressService::class.java)
 
 
 

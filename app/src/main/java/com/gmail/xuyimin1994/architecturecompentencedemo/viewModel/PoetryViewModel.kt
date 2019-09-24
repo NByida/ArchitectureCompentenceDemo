@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gmail.xuyimin1994.architecturecompentencedemo.entity.Poetry
 import com.gmail.xuyimin1994.architecturecompentencedemo.net.PoertyNet
-import com.gmail.xuyimin1994.architecturecompentencedemo.utils.RegUtil
+import com.gmail.xuyimin1994.architecturecompentencedemo.net.ServiceCreator
 import com.gmail.xuyimin1994.architecturecompentencedemo.utils.RegUtil.Companion.getAddress
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -27,7 +27,9 @@ class PoetryViewModel : ViewModel(){
         PoertyNet.getInstance().fetchAllPoetry(page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ response -> weather.value=response.list},{t-> Log.e("onFailure", "aa")})
+                .subscribe({ response -> weather.value=response.list},{t->
+                    ServiceCreator.regainAddress=true
+                    Log.e("getpoetry onFailure", t.message)})
         return weather;
     }
 
@@ -35,9 +37,8 @@ class PoetryViewModel : ViewModel(){
         PoertyNet.getInstance().getNewAddress()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({r->address.value=getAddress(r)},{ t->Log.e("onFailure", "aa")})
+                .subscribe({r->address.value=getAddress(r)},{ t->Log.e("getaddress onFailure", t.message)})
         return address
-
     }
 
     private fun launch(block: suspend () -> Unit, error: suspend (Throwable) -> Unit) = viewModelScope.launch {

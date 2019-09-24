@@ -1,5 +1,7 @@
 package com.gmail.xuyimin1994.architecturecompentencedemo.net
 
+import com.gmail.xuyimin1994.architecturecompentencedemo.app.App
+import com.gmail.xuyimin1994.architecturecompentencedemo.utils.SharedPreferenceUtil
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -14,18 +16,24 @@ import retrofit2.converter.scalars.ScalarsConverterFactory
  **/
 object ServiceCreator {
     private const val BASE_URL = "http://3cc478c4.ngrok.io/"
-
-
     var httpLoggingInterceptor= HttpLoggingInterceptor()
 
 
+    var regainAddress=false
+
     private val builder = Retrofit.Builder()
-            .baseUrl(BASE_URL)
+//            .baseUrl(if(regainAddress)getAddress() else BASE_URL)
+            .baseUrl(getAddress())
             .client(OkHttpClient.Builder().addInterceptor(httpLoggingInterceptor).build())
             //直接获取字符串
             .addConverterFactory(GsonConverterFactory.create())
             .addConverterFactory(ScalarsConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+
+    fun getAddress():String{
+        var address=SharedPreferenceUtil.getInstance().get(App.context,"address","a") as String
+            return (if(address.equals("a")) BASE_URL else address)
+    }
 
     private val addressBuilder = Retrofit.Builder()
             .baseUrl(BASE_URL)
