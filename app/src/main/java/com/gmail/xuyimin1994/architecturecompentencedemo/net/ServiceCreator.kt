@@ -15,9 +15,10 @@ import retrofit2.converter.scalars.ScalarsConverterFactory
  *2019/7/1 0001
  **/
 object ServiceCreator {
-    private const val BASE_URL = "http://3cc478c4.ngrok.io/"
-    var httpLoggingInterceptor= HttpLoggingInterceptor()
 
+    private const val BASE_URL = "http://3cc478c4.ngrok.io1/"
+
+    var httpLoggingInterceptor= HttpLoggingInterceptor()
 
     var regainAddress=false
 

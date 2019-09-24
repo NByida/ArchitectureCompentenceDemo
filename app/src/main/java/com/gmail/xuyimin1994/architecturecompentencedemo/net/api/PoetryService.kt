@@ -16,4 +16,9 @@ interface PoetryService {
     @GET("all/{index}")
     fun getPoetry(@Path("index") index: Int): Observable<BaseBean>
 
+
+
+    @GET("name/{name}/{index}")
+    fun searchPoetry(@Path("name") name: String,@Path("index") index: Int): Observable<BaseBean>
+
 }

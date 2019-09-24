@@ -26,9 +26,12 @@ abstract class RvActivity: AppCompatActivity() {
         refreshLayout?.let{
             it.setOnRefreshListener {
                 page=1
+                it.setEnableRefresh(false)
                 pullData(1)
             }
-            it.setOnLoadMoreListener{pullData(page++)}
+            it.setOnLoadMoreListener{
+                it.setEnableLoadMore(false)
+                pullData(++page)}
         }
         pullData(page)
     }

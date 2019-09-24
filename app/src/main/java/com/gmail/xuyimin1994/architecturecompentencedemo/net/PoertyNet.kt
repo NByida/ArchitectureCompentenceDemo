@@ -21,9 +21,18 @@ class PoertyNet {
         return poertyService.getPoetry(index)
     }
 
+
     fun getNewAddress(): Observable<String> {
         return addressService.getAddress()
     }
+
+
+    fun searchPoetry(name:String,index: Int ): Observable<BaseBean> {
+        return poertyService.searchPoetry(name,index)
+    }
+
+
+
 
 
     companion object{

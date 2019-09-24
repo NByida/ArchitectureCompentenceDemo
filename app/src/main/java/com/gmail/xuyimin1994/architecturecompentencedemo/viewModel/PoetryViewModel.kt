@@ -23,30 +23,38 @@ class PoetryViewModel : ViewModel(){
     var address = MutableLiveData<String>()
 
 
-    fun getWeather(page:Int) :LiveData<List<Poetry>>{
+    fun getAllPoetry(page:Int) :LiveData<List<Poetry>>{
         PoertyNet.getInstance().fetchAllPoetry(page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ response -> weather.value=response.list},{t->
+                .subscribe({ response ->
+                    weather.value=response.list
+                    Log.e("sub", response.list!![0].name)
+                },{t->
                     ServiceCreator.regainAddress=true
                     Log.e("getpoetry onFailure", t.message)})
-        return weather;
+        return weather
     }
 
-    fun getAddress():LiveData<String>{
+
+    fun getAddress():LiveData<String> {
         PoertyNet.getInstance().getNewAddress()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({r->address.value=getAddress(r)},{ t->Log.e("getaddress onFailure", t.message)})
+                .subscribe({ r -> address.value = getAddress(r) }, { t -> Log.e("getaddress onFailure", t.message) })
         return address
     }
 
-    private fun launch(block: suspend () -> Unit, error: suspend (Throwable) -> Unit) = viewModelScope.launch {
-        try {
-            block()
-        } catch (e: Throwable) {
-            error(e)
+        fun searchPoetryByName(name: String, page: Int): LiveData<List<Poetry>> {
+            PoertyNet.getInstance().searchPoetry(name, page)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe({ response -> weather.value = response.list }, { t -> Log.e("onFailure", "aa") })
+            return weather;
+
         }
-    }
+
+
+
 
 }

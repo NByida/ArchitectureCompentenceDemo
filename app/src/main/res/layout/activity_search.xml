@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:gravity="center_vertical">
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+
+            <EditText
+                android:id="@+id/edit_search"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:paddingLeft="12dp"
+                android:drawablePadding="4dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:layout_marginRight="15dp"
+                android:imeOptions="actionSearch"
+                android:singleLine="true"
+                android:maxLines="1"
+                android:inputType="text"
+                android:hint="搜索唐诗、宋词"
+                android:textColorHint="#999999"
+                android:textColor="#22262D"
+                android:textSize="12sp"
+                android:background="@drawable/bg_round_corner_15"/>
+
+            <TextView
+                android:id="@+id/delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginRight="22dp"
+                android:text="删除"
+               />
+
+
+        </FrameLayout>
+
+
+
+
+        <TextView
+            android:id="@+id/close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="取消"
+            android:layout_marginRight="15dp"
+            android:textColor="#22262D"
+            android:textSize="16sp"/>
+
+    </LinearLayout>
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_auto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+</LinearLayout>

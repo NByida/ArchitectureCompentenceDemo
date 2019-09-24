@@ -4,6 +4,7 @@ package com.gmail.xuyimin1994.architecturecompentencedemo.ui
 import android.os.Bundle
 import android.util.Log
 
+
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,11 +22,13 @@ class MainActivity : RvActivity() {
 
     lateinit var adapter:PoetryAdapter
     lateinit var viewModel:PoetryViewModel
+    lateinit var observer: Observer<List<Poetry>>
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        initObserver()
         viewModel = ViewModelProviders.of(this).get(PoetryViewModel::class.java)
         parentCreated()
         initRv()
@@ -37,6 +40,9 @@ class MainActivity : RvActivity() {
         adapter= PoetryAdapter()
         adapter.bindToRecyclerView(rv_auto)
         adapter.onItemClickListener= BaseQuickAdapter.OnItemClickListener { a, v, p ->PoetryDetailActivity.startMe(this@MainActivity, a.getItem(p) as Poetry) }
+        tv_search.setOnClickListener {
+            SearchActivity.startMe(this)
+        }
     }
 
     override fun pullData(page: Int) {
@@ -46,21 +52,30 @@ class MainActivity : RvActivity() {
         }
     }
 
-    fun getWeather(page:Int,viewModel:PoetryViewModel){
-        viewModel.getWeather(page).observe(this, Observer {list->
+    fun initObserver(){
+        observer= Observer {list:List<Poetry>->
             if(page==1){
                 refreshLayout.finishRefresh()
                 adapter.replaceData(list)
+                refreshLayout.setEnableLoadMore(true)
             }else{
                 refreshLayout.finishLoadMore()
                 adapter.addData(list)
+                refreshLayout.setEnableLoadMore(true)
             }
             adapter.notifyDataSetChanged()
-        })
+        }
+    }
+
+
+    fun getWeather(page:Int,viewModel:PoetryViewModel){
+        viewModel.getAllPoetry(page).observe(this, observer)
     }
 
     fun getAddress(viewModel:PoetryViewModel){
         viewModel.getAddress().observe(this, Observer<String>{s->
-            SharedPreferenceUtil.getInstance().put(this,"address",s)})
+            SharedPreferenceUtil.getInstance().put(this,"address",s.replace("http","https"))
+            Log.e("address",s+"")
+        })
     }
 }
