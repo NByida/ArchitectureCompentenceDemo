@@ -1,6 +1,5 @@
 package com.gmail.xuyimin1994.architecturecompentencedemo.ui
 
-import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.gmail.xuyimin1994.architecturecompentencedemo.R
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
@@ -33,7 +32,6 @@ abstract class RvActivity: AppCompatActivity() {
                 it.setEnableLoadMore(false)
                 pullData(++page)}
         }
-        pullData(page)
     }
 
 }

@@ -22,9 +22,16 @@ import com.gmail.xuyimin1994.architecturecompentencedemo.adapter.PoetryAdapter
 import com.gmail.xuyimin1994.architecturecompentencedemo.entity.Poetry
 import com.gmail.xuyimin1994.architecturecompentencedemo.viewModel.PoetryViewModel
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.rv_auto
+import kotlinx.android.synthetic.main.activity_search.*
 import java.util.ArrayList
 
-class SearchActivity: AppCompatActivity() {
+class SearchActivity: RvActivity() {
+
+    override fun pullData(page: Int) {
+        search()
+    }
 
     companion object {
         fun startMe(context:AppCompatActivity){
@@ -32,11 +39,10 @@ class SearchActivity: AppCompatActivity() {
         }
     }
 
-    var page=1
     lateinit var adapter:PoetryAdapter
-    lateinit var refreshLayout:SmartRefreshLayout
     lateinit var viewModel:PoetryViewModel
     lateinit var observer: Observer<List<Poetry>>
+    lateinit var   word:String
 
 
 
@@ -44,55 +50,49 @@ class SearchActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
         initObserver()
-        refreshLayout =findViewById(R.id.refresh_layout)
-        var recycleView: RecyclerView =findViewById(R.id.rv_auto)
+        viewModel = ViewModelProviders.of(this).get(PoetryViewModel::class.java)
+        initView()
+        initRv()
+        parentCreated()
+    }
 
-        var editSearch: EditText =findViewById(R.id.edit_search)
-        var tvDelete: TextView =findViewById(R.id.delete)
-        tvDelete.setOnClickListener {
-            editSearch.setText("")
+    fun initView(){
+        delete.setOnClickListener {
+            edit_search.setText("")
         }
 
-        editSearch.addTextChangedListener(object : TextWatcher {
+        edit_search.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
 
             }
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 if (s.toString().length == 0) {
-                    tvDelete.setVisibility(View.GONE)
+                    delete.setVisibility(View.GONE)
                 } else
-                    tvDelete.setVisibility(View.VISIBLE)
+                    delete.setVisibility(View.VISIBLE)
             }
 
             override fun afterTextChanged(s: Editable) {
             }
         })
-        viewModel = ViewModelProviders.of(this).get(PoetryViewModel::class.java)
 
-        editSearch.setOnEditorActionListener { v, actionId, event ->
+        edit_search.setOnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                var word:String=editSearch.text.toString()
+                word=edit_search.text.toString()
                 page=1
-                search(word)
+                search()
             }
             false
         }
+    }
+
+    fun initRv(){
         var manager= LinearLayoutManager(this)
-        recycleView.layoutManager=manager
+        rv_auto.layoutManager=manager
         adapter= PoetryAdapter()
-        adapter.bindToRecyclerView(recycleView)
+        adapter.bindToRecyclerView(rv_auto)
         adapter.onItemClickListener= BaseQuickAdapter.OnItemClickListener { a, v, p ->PoetryDetailActivity.startMe(this@SearchActivity, a.getItem(p) as Poetry) }
-        refreshLayout.setOnRefreshListener {
-            var word:String=editSearch.text.toString()
-            page=1
-            search(word)
-        }
-        refreshLayout.setOnLoadMoreListener {
-            page++;
-            var word:String=editSearch.text.toString()
-            search(word)
-        }
     }
 
     fun initObserver(){
@@ -110,9 +110,9 @@ class SearchActivity: AppCompatActivity() {
         }
     }
 
-    fun search(name:String){
-        if(name.length==0)return
-        viewModel.searchPoetryByName(name,page).observe(this, observer)
+    fun search(){
+        if( word.length==0)return
+        viewModel.searchPoetryByName(word,page).observe(this, observer)
     }
 
 }

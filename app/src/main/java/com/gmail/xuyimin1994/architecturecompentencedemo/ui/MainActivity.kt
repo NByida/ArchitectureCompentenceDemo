@@ -32,6 +32,7 @@ class MainActivity : RvActivity() {
         viewModel = ViewModelProviders.of(this).get(PoetryViewModel::class.java)
         parentCreated()
         initRv()
+        pullData(page)
     }
 
     fun initRv(){
