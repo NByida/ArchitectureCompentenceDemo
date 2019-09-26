@@ -1,9 +1,12 @@
 package com.gmail.xuyimin1994.architecturecompentencedemo.net
 
+import com.gmail.xuyimin1994.architecturecompentencedemo.app.App
 import com.gmail.xuyimin1994.architecturecompentencedemo.entity.BaseBean
 import com.gmail.xuyimin1994.architecturecompentencedemo.net.api.AddressService
 import com.gmail.xuyimin1994.architecturecompentencedemo.net.api.PoetryService
 import io.reactivex.Observable
+import okhttp3.Cache
+import java.io.File
 
 /**
  *com.gmail.xuyimin1994.architecturecompentencedemo.net
