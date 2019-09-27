@@ -75,7 +75,7 @@ class MainActivity : RvActivity() {
 
     fun getAddress(viewModel:PoetryViewModel){
         viewModel.getAddress().observe(this, Observer<String>{s->
-            SharedPreferenceUtil.getInstance().put(this,"address",s.replace("http","https"))
+            SharedPreferenceUtil.getInstance().put(this,"address",if(s.contains("https")){s}else{s.replace("http","https")})
             Log.e("address",s+"")
         })
     }

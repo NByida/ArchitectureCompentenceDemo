@@ -15,13 +15,13 @@ import retrofit2.http.Path
  **/
 interface PoetryService {
     @GET("all/{index}")
-    @Headers("Cache-control:max-stale="+36000)
+//    @Headers("Cache-control:max-stale="+36000)
     fun getPoetry(@Path("index") index: Int): Observable<BaseBean>
 
 
 
     @GET("name/{name}/{index}")
-    @Headers("Cache-control:max-stale="+36000)
+//    @Headers("Cache-control:max-stale="+36000)
     fun searchPoetry(@Path("name") name: String,@Path("index") index: Int): Observable<BaseBean>
 
 }
