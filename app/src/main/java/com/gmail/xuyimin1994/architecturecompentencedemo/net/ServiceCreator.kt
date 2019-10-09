@@ -30,7 +30,9 @@ object ServiceCreator {
     private val builder = Retrofit.Builder()
 //            .baseUrl(if(regainAddress)getAddress() else BASE_URL)
             .baseUrl(BASE_URL)
-            .client(OkHttpClient.Builder().cache(cache).addInterceptor(httpLoggingInterceptor).build())
+            .client(OkHttpClient.Builder()
+//                    .cache(cache)
+                    .addInterceptor(httpLoggingInterceptor).build())
             //直接获取字符串
             .addConverterFactory(GsonConverterFactory.create())
             .addConverterFactory(ScalarsConverterFactory.create())
