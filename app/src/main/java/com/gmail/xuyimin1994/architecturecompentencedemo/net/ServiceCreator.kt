@@ -18,7 +18,7 @@ import java.io.File
  **/
 object ServiceCreator {
 
-    private const val BASE_URL = "http://3cc478c4.ngrok.io1"
+    private const val BASE_URL = "http://34.92.180.73"
 
     var httpLoggingInterceptor= HttpLoggingInterceptor()
 
@@ -29,7 +29,7 @@ object ServiceCreator {
 
     private val builder = Retrofit.Builder()
 //            .baseUrl(if(regainAddress)getAddress() else BASE_URL)
-            .baseUrl(getAddress())
+            .baseUrl(BASE_URL)
             .client(OkHttpClient.Builder().cache(cache).addInterceptor(httpLoggingInterceptor).build())
             //直接获取字符串
             .addConverterFactory(GsonConverterFactory.create())

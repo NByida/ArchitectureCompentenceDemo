@@ -13,7 +13,7 @@ import retrofit2.http.Path
  *yida
  *2019/9/17 0017
  **/
-interface PoetryService {
+interface PoetryService  {
     @GET("all/{index}")
 //    @Headers("Cache-control:max-stale="+36000)
     fun getPoetry(@Path("index") index: Int): Observable<BaseBean>
