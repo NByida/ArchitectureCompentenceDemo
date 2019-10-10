@@ -1,9 +1,10 @@
-package com.gmail.xuyimin1994.architecturecompentencedemo.ui
+package com.gmail.xuyimin1994. architecturecompentencedemo.ui
 
 import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
 import android.text.Html
+import android.view.View.GONE
 import androidx.appcompat.app.AppCompatActivity
 import com.gmail.xuyimin1994.architecturecompentencedemo.R
 import com.gmail.xuyimin1994.architecturecompentencedemo.entity.Poetry
@@ -26,7 +27,6 @@ class PoetryDetailActivity:AppCompatActivity() {
         poetry=intent.getParcelableExtra("poetry")
         tv_title.setText(Html.fromHtml(poetry.name?.replace("</p> <p>","<br>")))
         tv_potery_name.setText(Html.fromHtml(poetry.poet?.replace("</p> <p>","<br>")))
-
         var mycontext=poetry.content?.replace("</p> <p>","<br>")!!
                .replace("，<br>","，")
                .replace("，","，<br>")
@@ -60,8 +60,17 @@ class PoetryDetailActivity:AppCompatActivity() {
     }
 
     fun setClick(){
+        if(poetry.appreciation!!.length<5){
+            lay_apprecate.visibility=GONE
+        }
+        if(poetry.notes!!.length<5){
+            lay_notes.visibility=GONE
+        }
+        if(poetry.translate!!.length<5){
+            lay_trans.visibility=GONE
+        }
         lay_content.setOnClickListener {context.text=Html.fromHtml(poetry.content?.replace("</p> <p>","<br>"))  }
-        lay_apprecate.setOnClickListener {context.text=Html.fromHtml(poetry.appreciation?.replace("</p> <p>","<br>"))  }
+        lay_apprecate.setOnClickListener { context.text=Html.fromHtml(poetry.appreciation?.replace("</p> <p>","<br>"))  }
         lay_notes.setOnClickListener {context.text=Html.fromHtml(poetry.notes?.replace("</p> <p>","<br>"))  }
         lay_trans.setOnClickListener {context.text=Html.fromHtml(poetry.translate?.replace("</p> <p>","<br>"))  }
     }
