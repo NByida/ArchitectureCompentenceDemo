@@ -28,7 +28,6 @@ object ServiceCreator {
     var regainAddress=false
 
     private val builder = Retrofit.Builder()
-//            .baseUrl(if(regainAddress)getAddress() else BASE_URL)
             .baseUrl(BASE_URL)
             .client(OkHttpClient.Builder()
 //                    .cache(cache)

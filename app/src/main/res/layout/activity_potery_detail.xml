@@ -1,97 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.gmail.xuyimin1994.architecturecompentencedemo.circleView.PeriscopeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
-
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
         >
-        <LinearLayout
-            android:layout_width="match_parent"
+        <ScrollView
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:orientation="vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:scrollbars="none"
             >
-            <com.gmail.xuyimin1994.architecturecompentencedemo.circleView.PeriscopeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
+                android:layout_height="match_parent"
                 android:orientation="vertical"
                 >
-                <TextView
-                    android:id="@+id/tv_title"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:gravity="center"
-                    android:textSize="20sp"
-                    android:layout_marginTop="40dp"
-                    android:textColor="#000000"
-                    android:layout_marginLeft="5dp"
-                    android:layout_height="wrap_content"
-                    android:text="春望"
-                    />
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    >
 
-
-                <TextView
-                    android:id="@+id/tv_potery_name"
-                    android:gravity="center"
-                    android:textSize="15sp"
-                    android:layout_margin="40dp"
-                    android:textColor="@color/colorAccent"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="杜甫"
-                    />
-
-                <TextView
-                    android:id="@+id/context"
-                    android:textSize="20sp"
-                    android:lineSpacingExtra="15dp"
-                    android:text="一去二三里，
+                    <TextView
+                        android:id="@+id/context"
+                        android:paddingTop="100dp"
+                        android:textSize="20sp"
+                        android:lineSpacingExtra="15dp"
+                        android:text="一去二三里，
 烟村四五家。
 亭台六七座，
 八九十之花。"
-                    android:textColor="#000000"
+                        android:textColor="#000000"
+                        android:layout_width="match_parent"
+                        android:gravity="left"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        />
+                </LinearLayout>
+
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:gravity="center"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    />
-
-            </com.gmail.xuyimin1994.architecturecompentencedemo.circleView.PeriscopeLayout>
-
-            <FrameLayout
-               android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                >
-
-                <TextView
-                    android:visibility="gone"
-                    android:layout_height="20dp"
-                    android:layout_width="20dp"
                     android:layout_gravity="center"
-                    android:background="@color/colorAccent"
-                    android:gravity="center"
-                    android:textColor="#ffffff"
-                    android:text="徐"
-                    />
+                    android:layout_marginTop="20dp"
+                    >
+
+                    <TextView
+                        android:visibility="gone"
+                        android:layout_height="20dp"
+                        android:layout_width="20dp"
+                        android:layout_gravity="center"
+                        android:background="@color/colorAccent"
+                        android:gravity="center"
+                        android:textColor="#ffffff"
+                        android:text="徐"
+                        />
+                </FrameLayout>
+            </LinearLayout>
+        </ScrollView>
 
 
-            </FrameLayout>
+        <TextView
+            android:id="@+id/tv_potery_name"
+            android:gravity="center"
+            android:textSize="15sp"
+            android:layout_marginRight="40dp"
+            android:textColor="@color/colorAccent"
+            android:paddingTop="100dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_width="wrap_content"
+            android:maxEms="1"
+            android:layout_height="wrap_content"
+            android:text="杜甫"
+            />
 
-
-
-
-        </LinearLayout>
-    </ScrollView>
+        <TextView
+            android:id="@+id/tv_title"
+            android:ems="1"
+            android:layout_marginRight="40dp"
+            android:layout_width="wrap_content"
+            android:textSize="20sp"
+            android:paddingTop="100dp"
+            android:textColor="#000000"
+            android:layout_marginLeft="5dp"
+            android:layout_height="wrap_content"
+            android:text="春望"
+            />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -209,4 +213,121 @@
             />
     </LinearLayout>
 
-</com.gmail.xuyimin1994.architecturecompentencedemo.circleView.PeriscopeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="horizontal"
+        >
+
+        <LinearLayout
+            android:id="@+id/lay_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:layout_height="match_parent"
+            >
+            <LinearLayout
+                android:layout_width="50dp"
+                android:layout_height="70dp"
+                android:orientation="vertical"
+                >
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@color/c"
+                    />
+
+                <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="正文"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lay_notes"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:layout_height="match_parent"
+            >
+            <LinearLayout
+                android:layout_width="50dp"
+                android:layout_height="70dp"
+                android:orientation="vertical"
+                >
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@color/c"
+                    />
+
+                <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="注释"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lay_trans"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:layout_height="match_parent"
+            >
+            <LinearLayout
+                android:layout_width="50dp"
+                android:layout_height="70dp"
+                android:orientation="vertical"
+                >
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@color/c"
+                    />
+
+                <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="译文"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lay_apprecate"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:layout_height="match_parent"
+            >
+            <LinearLayout
+                android:layout_width="50dp"
+                android:layout_height="70dp"
+                android:orientation="vertical"
+                >
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@color/c"
+                    />
+
+                <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="赏析"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>
