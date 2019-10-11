@@ -26,6 +26,6 @@ public class ParabolaEvaluator implements TypeEvaluator<PointF> {
 
     public void destory(){
         if(point==null)return;
-//        point=null;
+//        point=rv_empty;
     }
 }

@@ -63,6 +63,7 @@ class SearchAllFrag  constructor(var type : SearchType): RvFragmnet() {
         adapter= PoetryAdapter()
         adapter.bindToRecyclerView(rv_auto)
         adapter.onItemClickListener= BaseQuickAdapter.OnItemClickListener { a, v, p -> PoetryDetailActivity.startMe(activity as FragmentActivity, a.getItem(p) as Poetry) }
+        adapter.setEmptyView(R.layout.rv_empty)
     }
 
     fun initObserver(){
