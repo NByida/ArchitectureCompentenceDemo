@@ -34,6 +34,18 @@ class PoertyNet {
         return poertyService.searchPoetry(name,index)
     }
 
+    fun searchAll(name:String,index: Int ): Observable<BaseBean> {
+        return poertyService.searchAll(name,index)
+    }
+
+    fun searchPoet(name:String,index: Int ): Observable<BaseBean> {
+        return poertyService.searchPoet(name,index)
+    }
+
+    fun searchContent(name:String,index: Int ): Observable<BaseBean> {
+        return poertyService.searchContext(name,index)
+    }
+
 
 
 

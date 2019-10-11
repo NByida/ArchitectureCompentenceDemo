@@ -24,4 +24,16 @@ interface PoetryService  {
 //    @Headers("Cache-control:max-stale="+36000)
     fun searchPoetry(@Path("name") name: String,@Path("index") index: Int): Observable<BaseBean>
 
+    @GET("all/{name}/{index}")
+//    @Headers("Cache-control:max-stale="+36000)
+    fun searchAll(@Path("name") name: String,@Path("index") index: Int): Observable<BaseBean>
+
+    @GET("auth/{name}/{index}")
+//    @Headers("Cache-control:max-stale="+36000)
+    fun searchPoet(@Path("name") name: String,@Path("index") index: Int): Observable<BaseBean>
+
+    @GET("content/{name}/{index}")
+//    @Headers("Cache-control:max-stale="+36000)
+    fun searchContext(@Path("name") name: String,@Path("index") index: Int): Observable<BaseBean>
+
 }

@@ -1,5 +1,6 @@
 package com.gmail.xuyimin1994. architecturecompentencedemo.ui
 
+import android.app.Activity
 import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
@@ -16,7 +17,7 @@ import kotlinx.android.synthetic.main.activity_potery_detail.tv_title
 class PoetryDetailActivity:AppCompatActivity() {
     lateinit var poetry:Poetry
     companion object {
-        fun startMe(context:AppCompatActivity,poetry:Poetry){
+        fun startMe(context: Activity, poetry:Poetry){
             context.startActivity(Intent(context,PoetryDetailActivity::class.java).putExtra("poetry",poetry))
         }
     }

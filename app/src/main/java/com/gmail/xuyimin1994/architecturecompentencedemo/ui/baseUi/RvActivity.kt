@@ -1,4 +1,4 @@
-package com.gmail.xuyimin1994.architecturecompentencedemo.ui
+package com.gmail.xuyimin1994.architecturecompentencedemo.ui.baseUi
 
 import androidx.appcompat.app.AppCompatActivity
 import com.gmail.xuyimin1994.architecturecompentencedemo.R
@@ -9,7 +9,7 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout
  *yida
  *2019/9/24 0024
  **/
-abstract class RvActivity: AppCompatActivity() {
+abstract class RvActivity: BaseActivity() {
     var page=1
     lateinit var refreshLayout:SmartRefreshLayout
 

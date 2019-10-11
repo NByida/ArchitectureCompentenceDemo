@@ -51,8 +51,33 @@ class PoetryViewModel : ViewModel(){
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe({ response -> weather.value = response.list }, { t -> Log.e("onFailure", "aa") })
             return weather;
-
         }
+
+    fun searchAll(name: String, page: Int): LiveData<List<Poetry>> {
+        PoertyNet.getInstance().searchAll(name, page)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ response -> weather.value = response.list }, { t -> Log.e("onFailure", "aa") })
+        return weather;
+    }
+
+    fun searchPoet(name: String, page: Int): LiveData<List<Poetry>> {
+        PoertyNet.getInstance().searchPoet(name, page)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ response -> weather.value = response.list }, { t -> Log.e("onFailure", "aa") })
+        return weather;
+    }
+
+
+    fun searchContent(name: String, page: Int): LiveData<List<Poetry>> {
+        PoertyNet.getInstance().searchContent(name, page)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ response -> weather.value = response.list }, { t -> Log.e("onFailure", "aa") })
+        return weather;
+    }
+
 
 
 

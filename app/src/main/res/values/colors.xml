@@ -12,4 +12,6 @@
     <color name="d"> #f65787</color>
     <color name="e"> #055000</color>
     <color name="f"> #ff64ff</color>
+    <color name="color_F4F4F4">#f4f4f4</color>
+    <color name="color_EC514E">#EC514E</color>
 </resources>

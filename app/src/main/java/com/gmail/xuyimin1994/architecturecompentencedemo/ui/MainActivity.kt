@@ -12,13 +12,27 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.gmail.xuyimin1994.architecturecompentencedemo.R
 import com.gmail.xuyimin1994.architecturecompentencedemo.adapter.PoetryAdapter
 import com.gmail.xuyimin1994.architecturecompentencedemo.entity.Poetry
+import com.gmail.xuyimin1994.architecturecompentencedemo.ui.baseUi.RvActivity
+import com.gmail.xuyimin1994.architecturecompentencedemo.ui.search.SearchActivity
 import com.gmail.xuyimin1994.architecturecompentencedemo.utils.SharedPreferenceUtil
 import com.gmail.xuyimin1994.architecturecompentencedemo.viewModel.PoetryViewModel
 import kotlinx.android.synthetic.main.activity_main.*
+import androidx.databinding.adapters.TextViewBindingAdapter.setText
+import org.greenrobot.eventbus.ThreadMode
+import org.greenrobot.eventbus.Subscribe
+
+
 
 
 class MainActivity : RvActivity() {
+    override fun getLayoutId(): Int {
+        return R.layout.activity_main
+    }
 
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
+    fun refreshSignTime(event: Observer<String>) {
+
+    }
 
     lateinit var adapter:PoetryAdapter
     lateinit var viewModel:PoetryViewModel
@@ -27,7 +41,6 @@ class MainActivity : RvActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
         initObserver()
         viewModel = ViewModelProviders.of(this).get(PoetryViewModel::class.java)
         parentCreated()
@@ -48,9 +61,9 @@ class MainActivity : RvActivity() {
 
     override fun pullData(page: Int) {
         getWeather(page,viewModel)
-        if (page==1){
-            getAddress(viewModel)
-        }
+//        if (page==1){
+//            getAddress(viewModel)
+//        }
     }
 
     fun initObserver(){
