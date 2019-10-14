@@ -13,8 +13,7 @@ class PoetryAdapter : BaseQuickAdapter<Poetry, MyHolder>(R.layout.item_poetry) {
     override fun convert(helper: MyHolder?, item: Poetry?) {
         if (helper != null) {
             if (item != null) {
-                helper
-                        .setTextStyle(R.id.tv_title)
+                helper.setTextStyle(R.id.tv_title)
                         .setTextStyle(R.id.tv_name)
                         .setTextStyle(R.id.context)
                         .setText(R.id.tv_title,Html.fromHtml(item.name))

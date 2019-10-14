@@ -18,8 +18,8 @@ import java.io.File
  **/
 object ServiceCreator {
 
-//    private const val BASE_URL = "http://34.92.180.73"
-    private const val BASE_URL = "http://192.168.1.75"
+
+    private const val BASE_URL = "https://xuyida.club"
 
 
     var httpLoggingInterceptor= HttpLoggingInterceptor()
