@@ -2,7 +2,6 @@ package com.gmail.xuyimin1994.architecturecompentencedemo.ui
 
 
 import android.os.Bundle
-import android.util.Log
 
 
 import androidx.lifecycle.Observer
@@ -14,10 +13,8 @@ import com.gmail.xuyimin1994.architecturecompentencedemo.adapter.PoetryAdapter
 import com.gmail.xuyimin1994.architecturecompentencedemo.entity.Poetry
 import com.gmail.xuyimin1994.architecturecompentencedemo.ui.baseUi.RvActivity
 import com.gmail.xuyimin1994.architecturecompentencedemo.ui.search.SearchActivity
-import com.gmail.xuyimin1994.architecturecompentencedemo.utils.SharedPreferenceUtil
 import com.gmail.xuyimin1994.architecturecompentencedemo.viewModel.PoetryViewModel
 import kotlinx.android.synthetic.main.activity_main.*
-import androidx.databinding.adapters.TextViewBindingAdapter.setText
 import org.greenrobot.eventbus.ThreadMode
 import org.greenrobot.eventbus.Subscribe
 
@@ -41,8 +38,8 @@ class MainActivity : RvActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        initObserver()
         viewModel = ViewModelProviders.of(this).get(PoetryViewModel::class.java)
+        initObserver()
         parentCreated()
         initRv()
         pullData(page)
@@ -59,11 +56,8 @@ class MainActivity : RvActivity() {
         }
     }
 
-    override fun pullData(page: Int) {
-        getWeather(page,viewModel)
-//        if (page==1){
-//            getAddress(viewModel)
-//        }
+     override fun pullData(page: Int) {
+         getWeather(page,viewModel)
     }
 
     fun initObserver(){
@@ -79,17 +73,15 @@ class MainActivity : RvActivity() {
             }
             adapter.notifyDataSetChanged()
         }
+        viewModel.weather.observe(this,observer)
     }
 
 
     fun getWeather(page:Int,viewModel:PoetryViewModel){
-        viewModel.getAllPoetry(page).observe(this, observer)
+        viewModel.getAllPoetry(page)
     }
 
-    fun getAddress(viewModel:PoetryViewModel){
-        viewModel.getAddress().observe(this, Observer<String>{s->
-            SharedPreferenceUtil.getInstance().put(this,"address",if(s.contains("https")){s}else{s.replace("http","https")})
-            Log.e("address",s+"")
-        })
-    }
+
+
+
 }

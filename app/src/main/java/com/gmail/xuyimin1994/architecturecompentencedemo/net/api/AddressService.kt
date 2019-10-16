@@ -1,6 +1,6 @@
 package com.gmail.xuyimin1994.architecturecompentencedemo.net.api
 
-import io.reactivex.Observable
+import retrofit2.Call
 import retrofit2.http.GET
 
 /**
@@ -10,5 +10,5 @@ import retrofit2.http.GET
  **/
 interface AddressService {
     @GET("https://github.com/NByida/proxyAddress/blob/master/address")
-    fun getAddress(): Observable<String>
+    fun getAddress(): Call<String>
 }

@@ -15,7 +15,6 @@ import com.gmail.xuyimin1994.architecturecompentencedemo.viewModel.PoetryViewMod
 import kotlinx.android.synthetic.main.fragment_search_all.*
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.gmail.xuyimin1994.architecturecompentencedemo.enums.SearchType
-import com.gmail.xuyimin1994.architecturecompentencedemo.event.Default
 import com.gmail.xuyimin1994.architecturecompentencedemo.event.Search
 import com.gmail.xuyimin1994.architecturecompentencedemo.ui.PoetryDetailActivity
 import org.greenrobot.eventbus.Subscribe
@@ -40,7 +39,6 @@ class SearchAllFrag  constructor(var type : SearchType): RvFragmnet() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         viewModel = ViewModelProviders.of(this).get(PoetryViewModel::class.java)
         initRv()
         initObserver()
@@ -79,16 +77,16 @@ class SearchAllFrag  constructor(var type : SearchType): RvFragmnet() {
             }
             adapter.notifyDataSetChanged()
         }
+        viewModel.weather.observe(this,observer)
     }
 
     fun search(){
         if( word.length==0)return
         when(type){
-            SearchType.TITLE->viewModel.searchPoetryByName(word,page).observe(this, observer)
-            SearchType.ALL->viewModel.searchAll(word,page).observe(this, observer)
-            SearchType.AUTHOR->viewModel.searchPoet(word,page).observe(this, observer)
-            SearchType.CONTENT->viewModel.searchContent(word,page).observe(this, observer)
+            SearchType.TITLE->viewModel.searchPoetryByName(word,page)
+            SearchType.ALL->viewModel.searchAll(word,page)
+            SearchType.AUTHOR->viewModel.searchPoet(word,page)
+            SearchType.CONTENT->viewModel.searchContent(word,page)
         }
-
     }
 }

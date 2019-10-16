@@ -19,7 +19,6 @@ abstract class RvActivity: BaseActivity() {
         initRefreshLayOut()
     }
 
-
     fun initRefreshLayOut(){
         refreshLayout=findViewById(R.id.refresh_layout)
         refreshLayout?.let{

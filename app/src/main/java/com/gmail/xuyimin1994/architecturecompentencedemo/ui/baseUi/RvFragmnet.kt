@@ -19,7 +19,6 @@ abstract class RvFragmnet: BaseFragment() {
         initRefreshLayOut()
     }
 
-
     fun initRefreshLayOut(){
         refreshLayout=view!!.findViewById(R.id.refresh_layout)
         refreshLayout.setOnRefreshListener {
