@@ -57,8 +57,8 @@ class MainActivity : RvActivity() {
     }
 
      override fun pullData(page: Int) {
-         getWeather(page,viewModel)
-    }
+         viewModel.getAllPoetry(page)
+     }
 
     fun initObserver(){
         observer= Observer {list:List<Poetry>->
@@ -75,13 +75,4 @@ class MainActivity : RvActivity() {
         }
         viewModel.weather.observe(this,observer)
     }
-
-
-    fun getWeather(page:Int,viewModel:PoetryViewModel){
-        viewModel.getAllPoetry(page)
-    }
-
-
-
-
 }

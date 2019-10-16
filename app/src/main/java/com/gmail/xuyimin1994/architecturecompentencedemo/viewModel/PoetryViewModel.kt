@@ -22,8 +22,6 @@ class PoetryViewModel : ViewModel(){
         weather.value=PoertyNet.getInstance().fetchAllPoetry(page).list
      },{}) }
 
-
-
       fun searchPoetryByName(name: String, page: Int) {
           launch({
           weather.value= PoertyNet.getInstance().searchPoetry(name, page).list
@@ -36,24 +34,24 @@ class PoetryViewModel : ViewModel(){
          },{})
      }
 
-         fun searchPoet(name: String, page: Int) {
-             launch({
-             weather.value = PoertyNet.getInstance().searchPoet(name, page).list
-             },{})
-         }
+    fun searchPoet(name: String, page: Int) {
+        launch({
+            weather.value = PoertyNet.getInstance().searchPoet(name, page).list
+        },{})
+    }
 
-         fun searchContent(name: String, page: Int) {
-             launch({
-                 weather.value = PoertyNet.getInstance().searchContent(name, page).list
-             },{})
-        }
+    fun searchContent(name: String, page: Int) {
+        launch({
+            weather.value = PoertyNet.getInstance().searchContent(name, page).list
+        },{})
+    }
 
-        fun launch(block: suspend () -> Unit, error: (Throwable) -> Unit) = viewModelScope.launch {
-            try {
-                block()
-            } catch (e: Throwable) {
-                error.invoke(e)
-            }
+    fun launch(block: suspend () -> Unit, error: (Throwable) -> Unit) = viewModelScope.launch {
+        try {
+            block()
+        } catch (e: Throwable) {
+            error.invoke(e)
         }
+    }
 
 }
