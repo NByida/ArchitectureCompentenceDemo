@@ -16,7 +16,6 @@ import kotlinx.coroutines.launch
 class PoetryViewModel : ViewModel(){
     var weather = MutableLiveData<List<Poetry>>()
 
-
      fun getAllPoetry(page:Int){
          launch({
         weather.value=PoertyNet.getInstance().fetchAllPoetry(page).list

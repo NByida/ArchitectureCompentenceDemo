@@ -163,6 +163,8 @@
 -dontwarn okhttp3.**
 -keep class okhttp3.**{*;}
 -keep class com.feimulibrary.http.SSLSocketFactoryCompat{*;}
+-keep class kotlinx.coroutines{*;}
+-keep class kotlinx.coroutines.**{ *; }
 
 #okio
 -dontwarn okio.**
