@@ -1,6 +1,8 @@
 package com.gmail.xuyimin1994.architecturecompentencedemo.ui
 
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 
 
@@ -24,6 +26,12 @@ import org.greenrobot.eventbus.Subscribe
 class MainActivity : RvActivity() {
     override fun getLayoutId(): Int {
         return R.layout.activity_main
+    }
+
+    companion object {
+        fun startMe(context: Activity){
+            context.startActivity(Intent(context,MainActivity::class.java))
+        }
     }
 
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
