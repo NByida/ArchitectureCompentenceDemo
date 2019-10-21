@@ -3,6 +3,8 @@ package com.gmail.xuyimin1994.architecturecompentencedemo.ui.search
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
+import androidx.core.app.ActivityOptionsCompat
+import androidx.core.util.Pair
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
@@ -62,7 +64,14 @@ class SearchAllFrag  constructor(var type : SearchType): RvFragmnet() {
         rv_auto.layoutManager=manager
         adapter= PoetryAdapter()
         adapter.bindToRecyclerView(rv_auto)
-        adapter.onItemClickListener= BaseQuickAdapter.OnItemClickListener { a, v, p -> PoetryDetailActivity.startMe(activity as FragmentActivity, a.getItem(p) as Poetry) }
+        adapter.onItemClickListener= BaseQuickAdapter.OnItemClickListener { a, v, p ->
+            var view =v as View
+            val pair = Pair<View, String>(view.findViewById(R.id.tv_title), "name")
+            val pair2 = Pair<View, String>( view.findViewById(R.id.tv_name)!!, "auth")
+            val pair3 = Pair<View, String>(view.findViewById(R.id.context)!!, "context")
+            val optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(activity as FragmentActivity, pair,pair2,pair3)
+            PoetryDetailActivity.startMe(activity as FragmentActivity, a.getItem(p) as Poetry,optionsCompat)
+        }
         adapter.setEmptyView(R.layout.rv_empty)
     }
 
@@ -82,6 +91,10 @@ class SearchAllFrag  constructor(var type : SearchType): RvFragmnet() {
                 refreshLayout.setEnableLoadMore(true)
             }
             adapter.notifyDataSetChanged()
+            if(!bean.size.equals("10")){
+                refreshLayout.setEnableLoadMore(false)
+
+            }
         }
         viewModel.weather.observe(this,observer)
     }

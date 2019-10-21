@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 
 
 import androidx.lifecycle.Observer
@@ -21,6 +22,10 @@ import com.gmail.xuyimin1994.architecturecompentencedemo.viewModel.PoetryViewMod
 import kotlinx.android.synthetic.main.activity_main.*
 import org.greenrobot.eventbus.ThreadMode
 import org.greenrobot.eventbus.Subscribe
+import androidx.core.app.ActivityOptionsCompat
+import androidx.core.util.Pair
+
+
 
 
 
@@ -61,7 +66,14 @@ class MainActivity : RvActivity() {
         rv_auto.layoutManager=manager
         adapter= PoetryAdapter()
         adapter.bindToRecyclerView(rv_auto)
-        adapter.onItemClickListener= BaseQuickAdapter.OnItemClickListener { a, v, p ->PoetryDetailActivity.startMe(this@MainActivity, a.getItem(p) as Poetry) }
+        adapter.onItemClickListener= BaseQuickAdapter.OnItemClickListener { a, v, p ->
+            var view =v as View
+            val pair = Pair<View, String>(view.findViewById(R.id.tv_title), "name")
+            val pair2 = Pair<View, String>( view.findViewById(R.id.tv_name)!!, "auth")
+            val pair3 = Pair<View, String>(view.findViewById(R.id.context)!!, "context")
+            val optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(this, pair,pair2,pair3)
+            PoetryDetailActivity.startMe(this@MainActivity, a.getItem(p) as Poetry,optionsCompat)
+         }
         tv_search.setOnClickListener {
             SearchActivity.startMe(this)
         }

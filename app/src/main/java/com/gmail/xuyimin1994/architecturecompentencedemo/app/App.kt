@@ -4,6 +4,9 @@ import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
 
+
+
+
 /**
  *com.gmail.xuyimin1994.architecturecompentencedemo.app
  *yida
@@ -21,4 +24,6 @@ class App: Application() {
         @SuppressLint("StaticFieldLeak")
         lateinit var context: Context
     }
+
+
 }

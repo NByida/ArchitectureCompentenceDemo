@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -29,10 +29,12 @@
                     android:orientation="vertical"
                     >
 
-                    <TextView
+                    <com.gmail.xuyimin1994.architecturecompentencedemo.ui.customeView.TypeFaceTextView
                         android:id="@+id/context"
                         android:paddingTop="100dp"
                         android:textSize="20sp"
+                        android:transitionName="context"
+
                         android:lineSpacingExtra="15dp"
                         android:text="一去二三里，
 烟村四五家。
@@ -68,13 +70,14 @@
         </ScrollView>
 
 
-        <TextView
+        <com.gmail.xuyimin1994.architecturecompentencedemo.ui.customeView.TypeFaceTextView
             android:id="@+id/tv_potery_name"
             android:gravity="center"
             android:textSize="15sp"
             android:layout_marginRight="40dp"
             android:textColor="@color/colorAccent"
             android:paddingTop="100dp"
+            android:transitionName="auth"
             android:layout_marginBottom="5dp"
             android:layout_marginLeft="5dp"
             android:layout_width="wrap_content"
@@ -83,9 +86,10 @@
             android:text="杜甫"
             />
 
-        <TextView
+        <com.gmail.xuyimin1994.architecturecompentencedemo.ui.customeView.TypeFaceTextView
             android:id="@+id/tv_title"
             android:ems="1"
+            android:transitionName="name"
             android:layout_marginRight="40dp"
             android:layout_width="wrap_content"
             android:textSize="20sp"
@@ -239,7 +243,7 @@
                     android:background="@color/c"
                     />
 
-                <TextView
+                <com.gmail.xuyimin1994.architecturecompentencedemo.ui.customeView.TypeFaceTextView
                     android:layout_gravity="center_horizontal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -266,7 +270,7 @@
                     android:background="@color/c"
                     />
 
-                <TextView
+                <com.gmail.xuyimin1994.architecturecompentencedemo.ui.customeView.TypeFaceTextView
                     android:layout_gravity="center_horizontal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -293,7 +297,7 @@
                     android:background="@color/c"
                     />
 
-                <TextView
+                <com.gmail.xuyimin1994.architecturecompentencedemo.ui.customeView.TypeFaceTextView
                     android:layout_gravity="center_horizontal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -320,7 +324,7 @@
                     android:background="@color/c"
                     />
 
-                <TextView
+                <com.gmail.xuyimin1994.architecturecompentencedemo.ui.customeView.TypeFaceTextView
                     android:layout_gravity="center_horizontal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

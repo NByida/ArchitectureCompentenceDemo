@@ -16,10 +16,4 @@ class MyHolder(view:View): BaseViewHolder(view){
         this.context=view.context
     }
 
-    fun setTextStyle(@IdRes viewId: Int): MyHolder {
-        val view = getView<TextView>(viewId)
-        val typeFaceHold = Typeface.createFromAsset(context.getAssets(), "fonts/xing_kai.ttf")
-        view.setTypeface(typeFaceHold)
-        return this
-    }
 }
