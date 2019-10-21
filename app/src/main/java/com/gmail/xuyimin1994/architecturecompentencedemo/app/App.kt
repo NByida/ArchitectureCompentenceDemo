@@ -12,10 +12,8 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout
 import com.scwang.smartrefresh.layout.header.ClassicsHeader
 import com.scwang.smartrefresh.layout.api.RefreshHeader
 import com.scwang.smartrefresh.layout.api.DefaultRefreshHeaderCreator
-
-
-
-
+import com.umeng.analytics.MobclickAgent
+import com.umeng.commonsdk.UMConfigure
 
 
 /**
@@ -28,7 +26,9 @@ class App: Application() {
     override fun onCreate() {
         super.onCreate()
         context=this
-//        JAnalyticsInterface.init(this)
+        UMConfigure.init(this, "5dadbaaf4ca357c215000020", "Umeng", UMConfigure.DEVICE_TYPE_PHONE, null)
+        // 选用AUTO页面采集模式
+        MobclickAgent.setPageCollectionMode(MobclickAgent.PageMode.AUTO)
     }
 
     companion object{

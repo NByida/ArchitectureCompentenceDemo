@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity;
 import com.gmail.xuyimin1994.architecturecompentencedemo.R
+import com.umeng.analytics.MobclickAgent
 import io.reactivex.Observable
 import java.util.concurrent.TimeUnit
 
@@ -24,6 +25,16 @@ class SetUpActivity : AppCompatActivity() {
                 .filter {it==1L}
                 .takeUntil{it==1L}
                 .subscribe{MainActivity.startMe(this)}
+    }
+
+    public override fun onResume() {
+        super.onResume()
+        MobclickAgent.onResume(this)
+    }
+
+    public override fun onPause() {
+        super.onPause()
+        MobclickAgent.onPause(this)
     }
 
 }

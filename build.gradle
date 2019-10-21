@@ -24,6 +24,9 @@ allprojects {
         maven {
             url 'https://dl.bintray.com/zouyuhan/maven'
         }
+        maven {
+            url 'https://dl.bintray.com/umsdk/release'
+        }
         maven{
             url 'https://maven.google.com/'
             name 'Google'

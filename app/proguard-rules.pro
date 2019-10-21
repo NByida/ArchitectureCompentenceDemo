@@ -52,6 +52,10 @@
  # 这句话能够使我们的项目混淆后产生映射文件
  # 包含有类名->混淆后类名的映射关系
 -verbose
+
+-keep public class com.gmail.xuyimin1994.architecturecompentencedemo.R$*{
+public static final int *;
+}
 #
 # ----------------------------- 默认保留 -----------------------------
 #
@@ -234,4 +238,12 @@
 -keep public class * extends com.chad.library.adapter.base.BaseViewHolder
 -keepclassmembers public class * extends com.chad.library.adapter.base.BaseViewHolder {
            <init>(android.view.View);
+}
+-keep class com.umeng.** {*;}
+-keepclassmembers class * {
+   public <init> (org.json.JSONObject);
+}
+-keepclassmembers enum * {
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
 }

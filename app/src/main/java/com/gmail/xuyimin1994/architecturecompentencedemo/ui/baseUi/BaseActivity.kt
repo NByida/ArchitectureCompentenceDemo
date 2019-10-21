@@ -7,6 +7,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.gmail.xuyimin1994.architecturecompentencedemo.event.Default
+import com.umeng.analytics.MobclickAgent
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -40,5 +41,15 @@ open abstract class BaseActivity: AppCompatActivity() {
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
     fun default(event: Default) {
 
+    }
+
+    public override fun onResume() {
+        super.onResume()
+        MobclickAgent.onResume(this)
+    }
+
+    public override fun onPause() {
+        super.onPause()
+        MobclickAgent.onPause(this)
     }
 }
