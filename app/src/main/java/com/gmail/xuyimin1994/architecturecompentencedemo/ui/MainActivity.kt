@@ -4,6 +4,7 @@ package com.gmail.xuyimin1994.architecturecompentencedemo.ui
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 
 
 import androidx.lifecycle.Observer
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.gmail.xuyimin1994.architecturecompentencedemo.R
 import com.gmail.xuyimin1994.architecturecompentencedemo.adapter.PoetryAdapter
+import com.gmail.xuyimin1994.architecturecompentencedemo.entity.BaseBean
 import com.gmail.xuyimin1994.architecturecompentencedemo.entity.Poetry
 import com.gmail.xuyimin1994.architecturecompentencedemo.ui.baseUi.RvActivity
 import com.gmail.xuyimin1994.architecturecompentencedemo.ui.search.SearchActivity
@@ -41,7 +43,8 @@ class MainActivity : RvActivity() {
 
     lateinit var adapter:PoetryAdapter
     lateinit var viewModel:PoetryViewModel
-    lateinit var observer: Observer<List<Poetry>>
+    lateinit var observer: Observer<BaseBean>
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -69,17 +72,24 @@ class MainActivity : RvActivity() {
      }
 
     fun initObserver(){
-        observer= Observer {list:List<Poetry>->
+        observer= Observer {bean:BaseBean->
+            if(bean.statue==-1){
+                if(page==1)refreshLayout.finishRefresh()else refreshLayout.finishLoadMore()
+                Log.e("error",bean.msg)
+                return@Observer
+            }
+
             if(page==1){
                 refreshLayout.finishRefresh()
-                adapter.replaceData(list)
+                adapter.replaceData(bean.list!!)
                 refreshLayout.setEnableLoadMore(true)
             }else{
                 refreshLayout.finishLoadMore()
-                adapter.addData(list)
+                adapter.addData(bean.list!!)
                 refreshLayout.setEnableLoadMore(true)
             }
             adapter.notifyDataSetChanged()
+
         }
         viewModel.weather.observe(this,observer)
     }

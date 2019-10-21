@@ -15,6 +15,7 @@ import com.gmail.xuyimin1994.architecturecompentencedemo.ui.baseUi.RvFragmnet
 import com.gmail.xuyimin1994.architecturecompentencedemo.viewModel.PoetryViewModel
 import kotlinx.android.synthetic.main.fragment_search_all.*
 import com.chad.library.adapter.base.BaseQuickAdapter
+import com.gmail.xuyimin1994.architecturecompentencedemo.entity.BaseBean
 import com.gmail.xuyimin1994.architecturecompentencedemo.enums.SearchType
 import com.gmail.xuyimin1994.architecturecompentencedemo.event.Search
 import com.gmail.xuyimin1994.architecturecompentencedemo.ui.PoetryDetailActivity
@@ -31,7 +32,7 @@ class SearchAllFrag  constructor(var type : SearchType): RvFragmnet() {
 
     lateinit var adapter: PoetryAdapter
     lateinit var viewModel: PoetryViewModel
-    lateinit var observer: Observer<List<Poetry>>
+    lateinit var observer: Observer<BaseBean>
     lateinit var word:String
 
     override fun getLayoutId(): Int {
@@ -66,14 +67,18 @@ class SearchAllFrag  constructor(var type : SearchType): RvFragmnet() {
     }
 
     fun initObserver(){
-        observer= Observer {list:List<Poetry>->
+        observer= Observer {bean:BaseBean->
+            if(bean.statue==-1){
+                if(page==1)refreshLayout.finishRefresh()else refreshLayout.finishLoadMore()
+                return@Observer
+            }
             if(page==1){
                 refreshLayout.finishRefresh()
-                adapter.replaceData(list)
+                adapter.replaceData(bean.list!!)
                 refreshLayout.setEnableLoadMore(true)
             }else{
                 refreshLayout.finishLoadMore()
-                adapter.addData(list)
+                adapter.addData(bean.list!!)
                 refreshLayout.setEnableLoadMore(true)
             }
             adapter.notifyDataSetChanged()
