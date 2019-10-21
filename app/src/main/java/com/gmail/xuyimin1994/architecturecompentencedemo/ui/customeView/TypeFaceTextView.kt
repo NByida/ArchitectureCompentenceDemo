@@ -17,11 +17,11 @@ class TypeFaceTextView(context: Context?, attrs: AttributeSet?) : AppCompatTextV
         val ta = context?.obtainStyledAttributes(attrs, R.styleable.TypeFaceTextView, 0, 0)
         var path:String?=ta?.getString( R.styleable.TypeFaceTextView_TypeFace_name)
         ta?.recycle()
-        val typeFaceHold = Typeface.createFromAsset(context?.assets, if(path==null){
-            "fonts/xing_kai.ttf"
-        }else{
-            "fonts/"+path+".ttf"
-        })
+//        val typeFaceHold = Typeface.createFromAsset(context?.assets, if(path==null){
+//            "fonts/xing_kai.ttf"
+//        }else{
+//            "fonts/"+path+".ttf"
+//        })
 //        typeface=typeFaceHold
     }
 }

@@ -15,8 +15,8 @@ android {
         applicationId "com.gmail.xuyimin1994.architecturecompentencedemo"
         minSdkVersion 15
         targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName "1.2"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         manifestPlaceholders = [
                 JPUSH_APPKEY : "035743bbeada01cb0e83848d",
