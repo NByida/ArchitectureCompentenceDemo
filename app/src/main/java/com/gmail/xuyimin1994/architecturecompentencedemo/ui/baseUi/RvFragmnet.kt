@@ -23,11 +23,9 @@ abstract class RvFragmnet: BaseFragment() {
         refreshLayout=view!!.findViewById(R.id.refresh_layout)
         refreshLayout.setOnRefreshListener {
             page=1
-            refreshLayout.setEnableRefresh(false)
                 pullData(1)
             }
         refreshLayout.setOnLoadMoreListener{
-            refreshLayout.setEnableLoadMore(false)
             pullData(++page)}
     }
 }

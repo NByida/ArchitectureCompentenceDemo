@@ -24,10 +24,7 @@ import org.greenrobot.eventbus.ThreadMode
 import org.greenrobot.eventbus.Subscribe
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
-
-
-
-
+import com.gmail.xuyimin1994.architecturecompentencedemo.utils.ToastUtil
 
 
 class MainActivity : RvActivity() {
@@ -59,6 +56,19 @@ class MainActivity : RvActivity() {
         parentCreated()
         initRv()
         pullData(page)
+    }
+
+    var time:Long=0L
+    override fun onBackPressed() {
+        if(time==0L){
+            time=System.currentTimeMillis()
+        }else if(System.currentTimeMillis()-time<1000){
+            super.onBackPressed()
+            time=0
+            return
+        }
+        time=System.currentTimeMillis()
+        ToastUtil.showToast(this,"再按一次退出沓诗词~")
     }
 
     fun initRv(){
