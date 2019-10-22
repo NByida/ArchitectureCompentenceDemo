@@ -26,10 +26,6 @@ class PoetryDetailActivity:BaseActivity() {
 
     lateinit var poetry:Poetry
     companion object {
-        fun startMe(context: Activity, poetry:Poetry){
-            context.startActivity(Intent(context,PoetryDetailActivity::class.java).putExtra("poetry",poetry))
-        }
-
         fun startMe(context: Activity, poetry:Poetry,activityOptionsCompat:ActivityOptionsCompat){
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                 context.startActivity(Intent(context,PoetryDetailActivity::class.java).putExtra("poetry",poetry),activityOptionsCompat.toBundle())
@@ -39,13 +35,14 @@ class PoetryDetailActivity:BaseActivity() {
         }
 
     }
+    lateinit var mycontext:String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         poetry=intent.getParcelableExtra("poetry")
-        tv_title.setText(Html.fromHtml(poetry.name?.replace("</p> <p>","<br>")))
+        tv_title.setText(Html.fromHtml(poetry.name?.replace("</p> <p>","<br>")?.replace("（","*")?.replace("）","")))
         tv_potery_name.setText(Html.fromHtml(poetry.poet?.replace("</p> <p>","<br>")))
-        var mycontext=poetry.content?.replace("</p> <p>","<br>")!!
+        mycontext=poetry.content?.replace("</p> <p>","<br>")!!
                .replace("，<br>","，")
                .replace("，","，<br>")
                .replace("；","；<br>")
@@ -79,7 +76,7 @@ class PoetryDetailActivity:BaseActivity() {
         if(poetry.translate!!.length<5){
             lay_trans.visibility=GONE
         }
-        lay_content.setOnClickListener {context.text=Html.fromHtml(poetry.content?.replace("</p> <p>","<br>"))  }
+        lay_content.setOnClickListener {context.text=Html.fromHtml(mycontext)  }
         lay_apprecate.setOnClickListener { context.text=Html.fromHtml(poetry.appreciation?.replace("</p> <p>","<br>"))  }
         lay_notes.setOnClickListener {context.text=Html.fromHtml(poetry.notes?.replace("</p> <p>","<br>"))  }
         lay_trans.setOnClickListener {context.text=Html.fromHtml(poetry.translate?.replace("</p> <p>","<br>"))  }
