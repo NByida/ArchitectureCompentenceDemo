@@ -29,4 +29,7 @@ interface PoetryService  {
     @GET("content/{name}/{index}")
     fun searchContext(@Path("name") name: String,@Path("index") index: Int): Call<BaseBean>
 
+    @GET("recommend/{id}/{index}")
+    fun getRecommendList(@Path("id") id: String,@Path("index") index: Int): Call<BaseBean>
+
 }

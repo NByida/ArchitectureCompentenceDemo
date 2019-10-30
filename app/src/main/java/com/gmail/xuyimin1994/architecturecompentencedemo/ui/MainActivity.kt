@@ -2,6 +2,7 @@ package com.gmail.xuyimin1994.architecturecompentencedemo.ui
 
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -97,7 +98,7 @@ class MainActivity : RvActivity() {
         observer= Observer {bean:BaseBean->
             if(bean.statue==-1){
                 if(page==1)refreshLayout.finishRefresh()else refreshLayout.finishLoadMore()
-                Log.e("error",bean.msg)
+                ToastUtil.showToast(this,bean.msg)
                 return@Observer
             }
 

@@ -17,7 +17,7 @@ class Poetry() :Parcelable{
     var name: String? = null
     var dynasty: String? = null
     var poet: String? = null
-    var id: Long = 0
+    var poetId: Long = 0
 
     constructor(parcel: Parcel) : this() {
         content = parcel.readString()
@@ -28,7 +28,7 @@ class Poetry() :Parcelable{
         name = parcel.readString()
         dynasty = parcel.readString()
         poet = parcel.readString()
-        id = parcel.readLong()
+        poetId = parcel.readLong()
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -40,7 +40,7 @@ class Poetry() :Parcelable{
         parcel.writeString(name)
         parcel.writeString(dynasty)
         parcel.writeString(poet)
-        parcel.writeLong(id)
+        parcel.writeLong(poetId)
     }
 
     override fun describeContents(): Int {

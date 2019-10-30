@@ -1,6 +1,7 @@
 package com.gmail.xuyimin1994.architecturecompentencedemo.ui.search
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.core.app.ActivityOptionsCompat
@@ -21,6 +22,7 @@ import com.gmail.xuyimin1994.architecturecompentencedemo.entity.BaseBean
 import com.gmail.xuyimin1994.architecturecompentencedemo.enums.SearchType
 import com.gmail.xuyimin1994.architecturecompentencedemo.event.Search
 import com.gmail.xuyimin1994.architecturecompentencedemo.ui.PoetryDetailActivity
+import com.gmail.xuyimin1994.architecturecompentencedemo.utils.ToastUtil
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 
@@ -79,6 +81,7 @@ class SearchAllFrag  constructor(var type : SearchType): RvFragmnet() {
         observer= Observer {bean:BaseBean->
             if(bean.statue==-1){
                 if(page==1)refreshLayout.finishRefresh()else refreshLayout.finishLoadMore()
+                ToastUtil.showToast(activity as Context,bean.msg)
                 return@Observer
             }
             if(page==1){

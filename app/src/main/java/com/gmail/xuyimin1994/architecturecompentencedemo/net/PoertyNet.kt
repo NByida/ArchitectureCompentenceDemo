@@ -49,6 +49,11 @@ class PoertyNet {
         result
     }
 
+    suspend fun getRecommend(poetryId:String,page:Int)= withContext(Dispatchers.IO){
+        var result:BaseBean=poertyService.getRecommendList(poetryId,page).await()
+        result
+    }
+
     companion object{
         private var net:PoertyNet?=null
         fun getInstance():PoertyNet{

@@ -15,8 +15,9 @@ import kotlinx.android.synthetic.main.activity_potery_detail.*
 import kotlinx.android.synthetic.main.activity_potery_detail.context
 import kotlinx.android.synthetic.main.activity_potery_detail.tv_title
 import androidx.core.app.ActivityOptionsCompat
-
-
+import androidx.lifecycle.ViewModelProviders
+import com.gmail.xuyimin1994.architecturecompentencedemo.viewModel.PoetryDeatilViewModel
+import com.gmail.xuyimin1994.architecturecompentencedemo.viewModel.PoetryViewModel
 
 
 class PoetryDetailActivity:BaseActivity() {
@@ -36,10 +37,14 @@ class PoetryDetailActivity:BaseActivity() {
 
     }
     lateinit var mycontext:String
+    lateinit var viewModel: PoetryDeatilViewModel
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        viewModel = ViewModelProviders.of(this).get(PoetryDeatilViewModel::class.java)
         poetry=intent.getParcelableExtra("poetry")
+        viewModel.getRecommend(poetry.poetId.toString(),1)
         tv_title.setText(Html.fromHtml(poetry.name?.replace("</p> <p>","<br>")?.replace("（","*")?.replace("）","")))
         tv_potery_name.setText(Html.fromHtml(poetry.poet?.replace("</p> <p>","<br>")))
         mycontext=poetry.content?.replace("</p> <p>","<br>")!!
