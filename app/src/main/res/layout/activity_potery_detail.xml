@@ -97,10 +97,15 @@
         </ScrollView>
 
         <LinearLayout
+            android:id="@+id/lay_recommend"
             android:layout_width="match_parent"
             android:layout_height="130dp"
-            android:background="@color/colorAccent"
             >
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_recommend"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
         </LinearLayout>
 
 

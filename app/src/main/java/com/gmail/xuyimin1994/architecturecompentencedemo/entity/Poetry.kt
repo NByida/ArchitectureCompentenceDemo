@@ -2,13 +2,22 @@ package com.gmail.xuyimin1994.architecturecompentencedemo.entity
 
 import android.os.Parcel
 import android.os.Parcelable
+import android.text.Html
+import android.text.Spanned
+import com.chad.library.adapter.base.entity.MultiItemEntity
 
 /**
  *com.gmail.xuyimin1994.architecturecompentencedemo.entity
  *yida
  *2019/9/17 0017
  **/
-class Poetry() :Parcelable{
+class Poetry() :Parcelable ,MultiItemEntity{
+    override fun getItemType(): Int {
+        return if(isTag==0){
+            1
+        }else 2
+    }
+
     var content: String? = null
     var translate: String? = null
     var notes: String? = null
@@ -18,6 +27,8 @@ class Poetry() :Parcelable{
     var dynasty: String? = null
     var poet: String? = null
     var poetId: Long = 0
+    var tag:String?=null
+    var isTag:Int=0
 
     constructor(parcel: Parcel) : this() {
         content = parcel.readString()
@@ -29,6 +40,8 @@ class Poetry() :Parcelable{
         dynasty = parcel.readString()
         poet = parcel.readString()
         poetId = parcel.readLong()
+        tag = parcel.readString()
+        isTag=parcel.readInt()
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -41,6 +54,30 @@ class Poetry() :Parcelable{
         parcel.writeString(dynasty)
         parcel.writeString(poet)
         parcel.writeLong(poetId)
+        parcel.writeString(tag)
+        parcel.writeInt(isTag)
+    }
+
+    fun getText(): Spanned  {
+        return Html.fromHtml(content?.replace("</p> <p>","<br>")!!
+                .replace("，<br>","，")
+                .replace("，","，<br>")
+                .replace("；","；<br>")
+                .replace("？","，<br>")
+                .replace("！","，<br>")
+                .replace("。&nbsp","。")
+                .replace("。&nbsp;","。")
+                .replace("。&nbsp ;","。")
+                .replace("。 <br/>","。")
+                .replace("。 <br>","。")
+                .replace("。<br/>","。")
+                .replace("。<br>","。")
+                .replace("。","。<br>")
+                .replace("。<br>;","。<br>")
+                .replace("<br> <br>","<br>")
+                .replace("<br><br/>","<br>")
+                .replace("<br><br>","<br>")
+                .replace("<br></span><br/>","<br>"))
     }
 
     override fun describeContents(): Int {
