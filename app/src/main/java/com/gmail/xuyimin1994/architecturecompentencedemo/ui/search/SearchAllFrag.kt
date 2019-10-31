@@ -37,7 +37,7 @@ class SearchAllFrag  constructor(var type : SearchType): RvFragmnet() {
     lateinit var adapter: PoetryAdapter
     lateinit var viewModel: PoetryViewModel
     lateinit var observer: Observer<BaseBean>
-    lateinit var word:String
+    var word:String?=null
 
     override fun getLayoutId(): Int {
         return R.layout.fragment_search_all
@@ -103,12 +103,15 @@ class SearchAllFrag  constructor(var type : SearchType): RvFragmnet() {
     }
 
     fun search(){
-        if( word.length==0)return
+        if (word==null){
+            refreshLayout.finishRefresh()
+            return
+        }
         when(type){
-            SearchType.TITLE->viewModel.searchPoetryByName(word,page)
-            SearchType.ALL->viewModel.searchAll(word,page)
-            SearchType.AUTHOR->viewModel.searchPoet(word,page)
-            SearchType.CONTENT->viewModel.searchContent(word,page)
+            SearchType.TITLE->viewModel.searchPoetryByName(word!!,page)
+            SearchType.ALL->viewModel.searchAll(word!!,page)
+            SearchType.AUTHOR->viewModel.searchPoet(word!!,page)
+            SearchType.CONTENT->viewModel.searchContent(word!!,page)
         }
     }
 }

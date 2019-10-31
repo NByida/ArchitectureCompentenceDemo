@@ -5,7 +5,6 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 
 
@@ -56,7 +55,7 @@ class MainActivity : RvActivity() {
         initObserver()
         parentCreated()
         initRv()
-        pullData(page)
+        refreshLayout.autoRefresh()
     }
 
     var time:Long=0L

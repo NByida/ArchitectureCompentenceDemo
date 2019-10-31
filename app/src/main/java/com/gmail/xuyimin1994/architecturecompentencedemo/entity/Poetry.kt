@@ -80,6 +80,26 @@ class Poetry() :Parcelable ,MultiItemEntity{
                 .replace("<br></span><br/>","<br>"))
     }
 
+    fun getTitle(): Spanned {
+        return Html.fromHtml(name?.replace("</p> <p>","<br>"))
+    }
+
+    fun getTrans(): Spanned {
+        return Html.fromHtml(translate?.replace("</p> <p>","<br>"))
+    }
+
+    fun getnotes(): Spanned {
+        return Html.fromHtml(notes?.replace("</p> <p>","<br>"))
+    }
+
+    fun getApprecate(): Spanned {
+        return Html.fromHtml(appreciation?.replace("</p> <p>","<br>"))
+    }
+
+    fun getPoetName(): Spanned {
+        return Html.fromHtml(poet?.replace("</p> <p>","<br>"))
+    }
+
     override fun describeContents(): Int {
         return 0
     }

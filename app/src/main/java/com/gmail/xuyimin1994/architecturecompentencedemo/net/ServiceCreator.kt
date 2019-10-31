@@ -25,7 +25,7 @@ object ServiceCreator {
 
     private val builder = Retrofit.Builder()
             .baseUrl(BASE_URL)
-            .client(OkHttpClient.Builder()
+            .client(OkHttpClient.Builder().retryOnConnectionFailure(true)
 //          .cache(cache)
             .addInterceptor(httpLoggingInterceptor).build())
             //直接获取字符串

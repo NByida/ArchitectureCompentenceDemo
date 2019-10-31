@@ -4,8 +4,8 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.text.Html
 import android.view.View.GONE
+import android.view.View.VISIBLE
 import com.gmail.xuyimin1994.architecturecompentencedemo.R
 import com.gmail.xuyimin1994.architecturecompentencedemo.entity.Poetry
 import com.gmail.xuyimin1994.architecturecompentencedemo.ui.baseUi.BaseActivity
@@ -42,55 +42,89 @@ class PoetryDetailActivity:BaseActivity() {
             context.startActivity(Intent(context,PoetryDetailActivity::class.java).putExtra("poetry",poetry))
         }
     }
-    lateinit var mycontext:String
     lateinit var viewModel: PoetryDeatilViewModel
     lateinit var adapter: RecommendAdapter
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(PoetryDeatilViewModel::class.java)
-        poetry=intent.getParcelableExtra("poetry")
         initRv()
         initObserver()
+        poetry=intent.getParcelableExtra("poetry")
         viewModel.getRecommend(poetry.poetId.toString(),1)
-        tv_title.setText(Html.fromHtml(poetry.name?.replace("</p> <p>","<br>")?.replace("（","*")?.replace("）","")))
-        tv_potery_name.setText(Html.fromHtml(poetry.poet?.replace("</p> <p>","<br>")))
+        setPoetryUi()
+    }
+
+    fun setPoetryUi(){
+        tv_title.text = poetry.getTitle()
+        tv_potery_name.text=poetry.getPoetName()
         context.text=poetry.getText()
         setClick()
     }
 
     fun setClick(){
-        if(poetry.appreciation!!.length<5){
-            lay_apprecate.visibility=GONE
+        if(poetry.appreciation!!.length<5){ lay_apprecate.visibility=GONE }
+        if(poetry.notes!!.length<5){ lay_notes.visibility=GONE }
+        if(poetry.translate!!.length<5){ lay_trans.visibility=GONE }
+        if(poetry.appreciation!!.length<5&&poetry.notes!!.length<5&&poetry.translate!!.length<5){
+            lay_content.visibility= GONE
         }
-        if(poetry.notes!!.length<5){
-            lay_notes.visibility=GONE
+        lay_content.setOnClickListener {context.text=poetry.getText()
+            tv_content.setTextColor(resources.getColor(R.color.colorAccent))
+            tv_trans.setTextColor(resources.getColor(R.color.black))
+            tv_note.setTextColor(resources.getColor(R.color.black))
+            tv_appracate.setTextColor(resources.getColor(R.color.black))
+            scroll_view.smoothScrollTo(0,0)
         }
-        if(poetry.translate!!.length<5){
-            lay_trans.visibility=GONE
+        lay_apprecate.setOnClickListener { context.text=poetry.getApprecate()
+            tv_appracate.setTextColor(resources.getColor(R.color.colorAccent))
+            tv_trans.setTextColor(resources.getColor(R.color.black))
+            tv_content.setTextColor(resources.getColor(R.color.black))
+            tv_note.setTextColor(resources.getColor(R.color.black))
+            scroll_view.smoothScrollTo(0,0)
         }
-        lay_content.setOnClickListener {context.text=poetry.getText()}
-        lay_apprecate.setOnClickListener { context.text=Html.fromHtml(poetry.appreciation?.replace("</p> <p>","<br>"))  }
-        lay_notes.setOnClickListener {context.text=Html.fromHtml(poetry.notes?.replace("</p> <p>","<br>"))  }
-        lay_trans.setOnClickListener {context.text=Html.fromHtml(poetry.translate?.replace("</p> <p>","<br>"))  }
+        lay_notes.setOnClickListener {context.text=poetry.getnotes()
+            tv_note.setTextColor(resources.getColor(R.color.colorAccent))
+            tv_trans.setTextColor(resources.getColor(R.color.black))
+            tv_content.setTextColor(resources.getColor(R.color.black))
+            tv_appracate.setTextColor(resources.getColor(R.color.black))
+            scroll_view.smoothScrollTo(0,0)
+        }
+        lay_trans.setOnClickListener {context.text=poetry.getTrans()
+            tv_trans.setTextColor(resources.getColor(R.color.colorAccent))
+            tv_note.setTextColor(resources.getColor(R.color.black))
+            tv_content.setTextColor(resources.getColor(R.color.black))
+            tv_appracate.setTextColor(resources.getColor(R.color.black))
+            scroll_view.smoothScrollTo(0,0)
+        }
+        var showOpition=true
+        context.setOnClickListener {
+           if (showOpition)  {
+               lay_recommend.visibility=GONE
+               lay_opercate.visibility=GONE
+           }else  {
+               if(adapter.data.size>0){
+                   lay_recommend.visibility=VISIBLE
+               }
+               lay_opercate.visibility=VISIBLE
+           }
+            showOpition=!showOpition
+        }
     }
 
     fun initRv(){
         rv_recommend.layoutManager=LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false)
         adapter=RecommendAdapter(null)
         adapter.bindToRecyclerView(rv_recommend)
-        adapter.onItemClickListener=  BaseQuickAdapter.OnItemClickListener{
-                a,_,p->
+        adapter.onItemClickListener=  BaseQuickAdapter.OnItemClickListener{a,_,p->
             var p=a.getItem(p) as Poetry
             if(p.isTag==0){
                 startMe(this as FragmentActivity, p)
-            }
-        }
+            }}
     }
 
     fun initObserver(){
-      var  observer= Observer {bean: BaseBean ->
+        viewModel = ViewModelProviders.of(this).get(PoetryDeatilViewModel::class.java)
+        var  observer= Observer {bean: BaseBean ->
             if(bean.statue==-1){
                 ToastUtil.showToast(this,bean.msg)
                 return@Observer
@@ -99,15 +133,24 @@ class PoetryDetailActivity:BaseActivity() {
             adapter.notifyDataSetChanged()
             if(bean.list!!.size==0){
                 lay_recommend.visibility= GONE
-            }
+            }else lay_recommend.visibility= VISIBLE
         }
         viewModel.poetry.observe(this,observer)
     }
 
+    /**
+     * 为诗词添加分类标签
+     */
     fun gaddTag(list: List<Poetry>?):List<Poetry>{
         var newlist= ArrayList<Poetry>()
         var iterator=list?.iterator()
-        var tag:String=""
+        var tag=""
+        if(list!!.size>0){
+            var p=Poetry()
+            p.isTag=1
+            p.tag="相关推荐"
+            newlist.add(p)
+        }
         while (iterator!!.hasNext()){
             var poetry:Poetry=iterator.next()
             if(!poetry.tag.equals(tag)){
