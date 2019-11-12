@@ -3,6 +3,8 @@ package com.gmail.xuyimin1994.architecturecompentencedemo.app
 import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
+import androidx.multidex.MultiDexApplication
+import cn.jpush.android.api.JPushInterface
 import com.gmail.xuyimin1994.architecturecompentencedemo.R
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter
 import com.scwang.smartrefresh.layout.api.RefreshLayout
@@ -21,13 +23,14 @@ import com.umeng.commonsdk.UMConfigure
  *yida
  *2019/9/24 0024
  **/
-class App: Application() {
+class App: MultiDexApplication() {
 
     override fun onCreate() {
         super.onCreate()
         context=this
         UMConfigure.init(this, "5dadbaaf4ca357c215000020", "Umeng", UMConfigure.DEVICE_TYPE_PHONE, null)
         // 选用AUTO页面采集模式
+        initJpush()
         MobclickAgent.setPageCollectionMode(MobclickAgent.PageMode.AUTO)
     }
 
@@ -36,6 +39,14 @@ class App: Application() {
         lateinit var context: Context
     }
 
+    fun initJpush(){
+        super.onCreate()
+        JPushInterface.setDebugMode(true)
+        JPushInterface.init(this)
+        var a= HashSet<String>()
+        a.add("on")
+        JPushInterface.setTags(this,1,a)
+    }
 
     init{
         SmartRefreshLayout.setDefaultRefreshHeaderCreator { context, layout ->

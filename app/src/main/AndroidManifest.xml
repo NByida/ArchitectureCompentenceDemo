@@ -11,6 +11,10 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
+    <uses-permission android:name="com.gmail.xuyimin1994.architecturecompentencedemo.permission.JPUSH_MESSAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
+
+
     <application
         android:name=".app.App"
         android:icon="@mipmap/ic_launcher"
@@ -35,9 +39,21 @@
         <activity android:name=".ui.MainActivity"></activity>
         <activity android:name=".ui.PoetryDetailActivity"></activity>
         <activity android:name=".ui.search.SearchActivity"></activity>
+        <receiver
+            android:name=".utils.JPushReceiver"
+            android:enabled="true"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.RECEIVE_MESSAGE" />
+                <category android:name="com.gmail.xuyimin1994.architecturecompentencedemo" />
+            </intent-filter>
+        </receiver>
+
         <meta-data
-            android:name="JPUSH_APPKEY"
-            android:value="035743bbeada01cb0e83848d" />
+        tools:replace="android:value"
+        android:name="JPUSH_APPKEY"
+        android:value="035743bbeada01cb0e83848d" />
+
     </application>
 
 </manifest>

@@ -102,7 +102,7 @@ class PoetryDetailActivity:BaseActivity() {
                lay_recommend.visibility=GONE
                lay_opercate.visibility=GONE
            }else  {
-               if(adapter.data.size>0){
+               if(adapter.data!=null&&adapter.data.size>0){
                    lay_recommend.visibility=VISIBLE
                }
                lay_opercate.visibility=VISIBLE

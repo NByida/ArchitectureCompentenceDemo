@@ -247,3 +247,10 @@ public static final int *;
     public static **[] values();
     public static ** valueOf(java.lang.String);
 }
+
+-dontwarn cn.jpush.**
+-keep class cn.jpush.** { *; }
+-keep class * extends cn.jpush.android.helpers.JPushMessageReceiver { *; }
+
+-dontwarn cn.jiguang.**
+-keep class cn.jiguang.** { *; }
