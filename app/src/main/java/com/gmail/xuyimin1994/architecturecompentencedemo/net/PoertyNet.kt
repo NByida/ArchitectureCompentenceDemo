@@ -54,6 +54,11 @@ class PoertyNet {
         result
     }
 
+    suspend fun getPoetryUnderTag(tagName:String,page:Int)= withContext(Dispatchers.IO){
+        var result:BaseBean= poertyService.getPoetryUnderTag(tagName,page).await()
+        result
+    }
+
     companion object{
         private var net:PoertyNet?=null
         fun getInstance():PoertyNet{

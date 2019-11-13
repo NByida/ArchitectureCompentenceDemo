@@ -32,4 +32,6 @@ interface PoetryService  {
     @GET("recommend/{id}/{index}")
     fun getRecommendList(@Path("id") id: String,@Path("index") index: Int): Call<BaseBean>
 
+    @GET("tag/{tagName}/{index}")
+    fun getPoetryUnderTag(@Path("tagName") tagName:String,@Path("index") index:Int): Call<BaseBean>
 }

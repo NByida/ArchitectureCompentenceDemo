@@ -84,6 +84,8 @@ android {
         implementation 'cn.jiguang.sdk:jcore:1.2.6' // 此处以JCore 2.1.6 版本为例。
 
         implementation 'com.android.support:multidex:1.0.3'
+        implementation 'com.nex3z:flow-layout:1.2.4'
+        implementation 'com.github.pdog18:dimension-extensions:1.0'
 
     }
     repositories {

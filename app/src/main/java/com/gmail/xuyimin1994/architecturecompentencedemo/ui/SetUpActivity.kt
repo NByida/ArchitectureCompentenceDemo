@@ -5,9 +5,11 @@ import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity;
+import com.gmail.xuyimin1994.architecturecompentencedemo.BuildConfig
 import com.gmail.xuyimin1994.architecturecompentencedemo.R
 import com.umeng.analytics.MobclickAgent
 import io.reactivex.Observable
+import kotlinx.android.synthetic.main.activity_set_up.*
 import java.util.concurrent.TimeUnit
 
 
@@ -25,6 +27,7 @@ class SetUpActivity : AppCompatActivity() {
                 .filter {it==1L}
                 .takeUntil{it==1L}
                 .subscribe{MainActivity.startMe(this)}
+        text.text=getString(R.string.app_name)+BuildConfig.VERSION_NAME
     }
 
     public override fun onResume() {

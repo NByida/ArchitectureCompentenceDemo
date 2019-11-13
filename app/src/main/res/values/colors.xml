@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#000000</color>
     <color name="colorYellow"> #fff787</color>
     <color name="transpant"> #00000000</color>
     <color name="white"> #FFFFFF</color>
@@ -14,5 +14,5 @@
     <color name="f"> #ff64ff</color>
     <color name="color_F4F4F4">#f4f4f4</color>
     <color name="color_EC514E">#EC514E</color>
-    <color name="black">#000000</color>
+    <color name="black">#666666</color>
 </resources>

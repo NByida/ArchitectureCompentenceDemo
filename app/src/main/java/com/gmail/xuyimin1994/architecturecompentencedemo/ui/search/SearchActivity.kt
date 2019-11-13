@@ -8,6 +8,8 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.inputmethod.EditorInfo
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -17,6 +19,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager.widget.ViewPager
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.gmail.xuyimin1994.architecturecompentencedemo.R
+import com.gmail.xuyimin1994.architecturecompentencedemo.adapter.NexFlowLayoutAdapter
 import com.gmail.xuyimin1994.architecturecompentencedemo.adapter.PoetryAdapter
 import com.gmail.xuyimin1994.architecturecompentencedemo.entity.Poetry
 import com.gmail.xuyimin1994.architecturecompentencedemo.enums.SearchType
@@ -67,6 +70,7 @@ class SearchActivity: BaseActivity() {
     fun initView(){
         delete.setOnClickListener {
             edit_search.setText("")
+            lay_recommend.visibility= VISIBLE
         }
 
         edit_search.addTextChangedListener(object : TextWatcher {
@@ -89,9 +93,12 @@ class SearchActivity: BaseActivity() {
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 word=edit_search.text.toString()
                 EventBus.getDefault().post(Search(word))
+                lay_recommend.visibility=GONE
             }
             false
         }
+        var flowAdapter: NexFlowLayoutAdapter=NexFlowLayoutAdapter(flow_history,null,false)
+//        flowAdapter.
     }
 
 
