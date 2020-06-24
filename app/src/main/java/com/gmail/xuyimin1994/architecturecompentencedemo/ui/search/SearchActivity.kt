@@ -19,6 +19,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager.widget.ViewPager
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.gmail.xuyimin1994.architecturecompentencedemo.R
+import com.gmail.xuyimin1994.architecturecompentencedemo.adapter.FlowItemClick
 import com.gmail.xuyimin1994.architecturecompentencedemo.adapter.NexFlowLayoutAdapter
 import com.gmail.xuyimin1994.architecturecompentencedemo.adapter.PoetryAdapter
 import com.gmail.xuyimin1994.architecturecompentencedemo.entity.Poetry
@@ -26,6 +27,8 @@ import com.gmail.xuyimin1994.architecturecompentencedemo.enums.SearchType
 import com.gmail.xuyimin1994.architecturecompentencedemo.event.Search
 import com.gmail.xuyimin1994.architecturecompentencedemo.ui.baseUi.BaseActivity
 import com.gmail.xuyimin1994.architecturecompentencedemo.ui.baseUi.RvActivity
+import com.gmail.xuyimin1994.architecturecompentencedemo.utils.Constants.SEARCH_WORD
+import com.gmail.xuyimin1994.architecturecompentencedemo.utils.SharedPreferenceUtil
 import com.gmail.xuyimin1994.architecturecompentencedemo.viewModel.PoetryViewModel
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
 import kotlinx.android.synthetic.main.activity_search.*
@@ -41,6 +44,7 @@ import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import java.util.*
+import kotlin.collections.ArrayList
 
 class SearchActivity: BaseActivity() {
 
@@ -94,12 +98,41 @@ class SearchActivity: BaseActivity() {
                 word=edit_search.text.toString()
                 EventBus.getDefault().post(Search(word))
                 lay_recommend.visibility=GONE
+
+                if(word.isNotEmpty()){
+                    var list=SharedPreferenceUtil.getInstance(this).getObject<ArrayList<String>>(SEARCH_WORD,ArrayList::class.java as Class<ArrayList<String>>)
+                    list?.let {
+                        if(list.size>=10){
+                            list.removeAt(0)
+                        }
+                        val iterator=it.listIterator()
+                        while (iterator.hasNext()){
+                            val string=iterator.next()
+                            if(word==string)iterator.remove()
+                        }
+                        list.add(word)
+                    }?:let{
+                        list= arrayListOf()
+                        list.add(word)
+                    }
+                    SharedPreferenceUtil.getInstance(this).putObject(SEARCH_WORD,list)
+                }
             }
             false
         }
-        var flowAdapter: NexFlowLayoutAdapter=NexFlowLayoutAdapter(flow_history,null,false)
-//        flowAdapter.
+        val flowAdapter: NexFlowLayoutAdapter=NexFlowLayoutAdapter(flow_history,null,false)
+        flowAdapter.setNeedReverse(true)
+        //kotlin Arraylist class获取太奇葩了
+        val list=SharedPreferenceUtil.getInstance(this).getObject<ArrayList<String>>(SEARCH_WORD,ArrayList::class.java as Class<ArrayList<String>>)
+        flowAdapter.setArrayList(list)
+        flowAdapter.setFlowItemClick(object : FlowItemClick {
+            override fun onclick(toString: String) {
+                EventBus.getDefault().post(Search(toString))
+                lay_recommend.visibility=GONE
+            }
+        })
     }
+
 
 
     fun initPagerIndicator(){

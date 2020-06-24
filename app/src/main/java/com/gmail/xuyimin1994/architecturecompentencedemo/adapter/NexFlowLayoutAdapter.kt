@@ -4,6 +4,7 @@ import android.content.Context
 import android.text.TextUtils
 import android.view.ViewGroup
 import android.widget.TextView
+import com.gmail.xuyimin1994.architecturecompentencedemo.R
 import com.nex3z.flowlayout.FlowLayout
 import com.pdog.dimension.dp
 import java.util.*
@@ -90,8 +91,8 @@ class NexFlowLayoutAdapter {
             val padLeft =12.dp
             val padRight = 6.dp
             textView.setPadding(padLeft, padRight, padLeft, padRight)
-//            textView.setTextColor(context.resources.getColor(R.color.color_22262D))
-//            textView.background = context.resources.getDrawable(R.drawable.bg_round_corner_f7f7f7_15)
+            textView.setTextColor(context.resources.getColor(R.color.white))
+            textView.background = context.resources.getDrawable(R.drawable.bg_round_corner_f7f7f7_15)
             textView.setOnClickListener { v ->
                 if (ItemClick != null) {
                    ItemClick!!.onclick(textView.text.toString())
