@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.scwang.smartrefresh.layout.SmartRefreshLayout
+    android:id="@+id/refresh_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transpant"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/transpant"
+
+        >
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_auto"
+            android:background="@color/transpant"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:overScrollMode="never"
+            />
+
+        <ImageView
+            android:id="@+id/btChange"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@color/white"
+            android:foregroundGravity="right"
+            android:layout_gravity="right|bottom"
+            android:layout_marginRight="24dp"
+            android:layout_marginBottom="24dp"
+            />
+
+        <ImageView
+            android:id="@+id/btChangePic"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@color/white"
+            android:foregroundGravity="right"
+            android:layout_gravity="left|bottom"
+            android:layout_marginLeft="24dp"
+            android:layout_marginBottom="24dp"
+            />
+    </FrameLayout>
+
+
+
+
+ </com.scwang.smartrefresh.layout.SmartRefreshLayout>

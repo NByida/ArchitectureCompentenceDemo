@@ -11,7 +11,7 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout
  **/
 abstract class RvFragmnet: BaseFragment() {
     var page=1
-    lateinit var refreshLayout:SmartRefreshLayout
+    lateinit var refreshLayout: SmartRefreshLayout
 
     abstract fun pullData(page:Int)
 

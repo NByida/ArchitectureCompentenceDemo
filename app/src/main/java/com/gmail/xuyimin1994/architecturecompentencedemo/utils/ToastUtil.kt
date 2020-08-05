@@ -221,8 +221,10 @@ class ToastUtil {
         val toastUtil: ToastUtil
             get() = holder.toastUtil
 
-        fun showToast(context: Context, s: String) {
-            ToastUtil().Short(context, s).setToastBackground(context.resources.getColor(R.color.white), R.drawable.bg_round_white).show()
+        fun showToast(context: Context?, s: String) {
+            context?.let {
+                ToastUtil().Short(context, s).setToastBackground(context.resources.getColor(R.color.white), R.drawable.bg_round_white).show()
+            }
         }
     }
 }

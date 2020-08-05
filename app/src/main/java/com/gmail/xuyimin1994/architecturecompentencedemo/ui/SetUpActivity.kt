@@ -26,7 +26,11 @@ class SetUpActivity : AppCompatActivity() {
         Observable.interval(1, TimeUnit.SECONDS)
                 .filter {it==1L}
                 .takeUntil{it==1L}
-                .subscribe{MainActivity.startMe(this)}
+                .subscribe{
+//                    MainActivity.startMe(this)
+                    MingJuActivity.startMe(this)
+
+                }
         text.text=getString(R.string.app_name)+BuildConfig.VERSION_NAME
     }
 

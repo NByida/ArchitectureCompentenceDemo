@@ -6,7 +6,9 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import com.gmail.xuyimin1994.architecturecompentencedemo.R
 import com.gmail.xuyimin1994.architecturecompentencedemo.event.Default
+import com.gyf.immersionbar.ktx.immersionBar
 import com.umeng.analytics.MobclickAgent
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -29,8 +31,14 @@ open abstract class BaseActivity: AppCompatActivity() {
             decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
             //View.SYSTEM_UI_FLAG_LAYOUT_STABLE
             window.statusBarColor = Color.TRANSPARENT
+            window.navigationBarColor = Color.TRANSPARENT
         }
         setContentView(getLayoutId())
+        immersionBar {
+            statusBarColor(R.color.transpant)
+            navigationBarColor(R.color.transpant)
+            transparentNavigationBar()
+        }
     }
 
     override fun onDestroy() {
@@ -52,4 +60,6 @@ open abstract class BaseActivity: AppCompatActivity() {
         super.onPause()
         MobclickAgent.onPause(this)
     }
+
+
 }

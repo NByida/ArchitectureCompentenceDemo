@@ -13,7 +13,7 @@ android {
     }
     defaultConfig {
         applicationId "com.gmail.xuyimin1994.architecturecompentencedemo"
-        minSdkVersion 15
+        minSdkVersion 19
         targetSdkVersion 28
         multiDexEnabled true
         versionCode 4
@@ -87,6 +87,14 @@ android {
         implementation 'com.nex3z:flow-layout:1.2.4'
         implementation 'com.github.pdog18:dimension-extensions:1.0'
 
+// 基础依赖包，必须要依赖
+        implementation 'com.gyf.immersionbar:immersionbar:3.0.0'
+// fragment快速实现（可选）
+        implementation 'com.gyf.immersionbar:immersionbar-components:3.0.0'
+// kotlin扩展（可选）
+        implementation 'com.gyf.immersionbar:immersionbar-ktx:3.0.0'
+        implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.5.8'
+        implementation 'com.github.tbruyelle:rxpermissions:0.12'
     }
     repositories {
         mavenCentral()

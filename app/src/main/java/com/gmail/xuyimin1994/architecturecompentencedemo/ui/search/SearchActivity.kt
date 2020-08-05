@@ -22,6 +22,7 @@ import com.gmail.xuyimin1994.architecturecompentencedemo.R
 import com.gmail.xuyimin1994.architecturecompentencedemo.adapter.FlowItemClick
 import com.gmail.xuyimin1994.architecturecompentencedemo.adapter.NexFlowLayoutAdapter
 import com.gmail.xuyimin1994.architecturecompentencedemo.adapter.PoetryAdapter
+import com.gmail.xuyimin1994.architecturecompentencedemo.app.App
 import com.gmail.xuyimin1994.architecturecompentencedemo.entity.Poetry
 import com.gmail.xuyimin1994.architecturecompentencedemo.enums.SearchType
 import com.gmail.xuyimin1994.architecturecompentencedemo.event.Search
@@ -30,7 +31,6 @@ import com.gmail.xuyimin1994.architecturecompentencedemo.ui.baseUi.RvActivity
 import com.gmail.xuyimin1994.architecturecompentencedemo.utils.Constants.SEARCH_WORD
 import com.gmail.xuyimin1994.architecturecompentencedemo.utils.SharedPreferenceUtil
 import com.gmail.xuyimin1994.architecturecompentencedemo.viewModel.PoetryViewModel
-import com.scwang.smartrefresh.layout.SmartRefreshLayout
 import kotlinx.android.synthetic.main.activity_search.*
 import net.lucode.hackware.magicindicator.ViewPagerHelper
 import net.lucode.hackware.magicindicator.buildins.UIUtil
@@ -100,7 +100,7 @@ class SearchActivity: BaseActivity() {
                 lay_recommend.visibility=GONE
 
                 if(word.isNotEmpty()){
-                    var list=SharedPreferenceUtil.getInstance(this).getObject<ArrayList<String>>(SEARCH_WORD,ArrayList::class.java as Class<ArrayList<String>>)
+                    var list=SharedPreferenceUtil.getInstance(App.context).getObject<ArrayList<String>>(SEARCH_WORD,ArrayList::class.java as Class<ArrayList<String>>)
                     list?.let {
                         if(list.size>=10){
                             list.removeAt(0)
@@ -115,7 +115,7 @@ class SearchActivity: BaseActivity() {
                         list= arrayListOf()
                         list.add(word)
                     }
-                    SharedPreferenceUtil.getInstance(this).putObject(SEARCH_WORD,list)
+                    SharedPreferenceUtil.getInstance(App.context).putObject(SEARCH_WORD,list)
                 }
             }
             false
@@ -123,7 +123,7 @@ class SearchActivity: BaseActivity() {
         val flowAdapter: NexFlowLayoutAdapter=NexFlowLayoutAdapter(flow_history,null,false)
         flowAdapter.setNeedReverse(true)
         //kotlin Arraylist class获取太奇葩了
-        val list=SharedPreferenceUtil.getInstance(this).getObject<ArrayList<String>>(SEARCH_WORD,ArrayList::class.java as Class<ArrayList<String>>)
+        val list=SharedPreferenceUtil.getInstance(App.context).getObject<ArrayList<String>>(SEARCH_WORD,ArrayList::class.java as Class<ArrayList<String>>)
         flowAdapter.setArrayList(list)
         flowAdapter.setFlowItemClick(object : FlowItemClick {
             override fun onclick(toString: String) {

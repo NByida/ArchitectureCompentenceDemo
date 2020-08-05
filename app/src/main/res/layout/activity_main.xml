@@ -77,5 +77,13 @@
         android:layout_gravity="right|bottom"
        />
 
+    <fragment
+        android:id="@+id/frg_tag"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="right"
+        android:name="com.gmail.xuyimin1994.architecturecompentencedemo.ui.TagsFragment"
+        />
+
 
 </FrameLayout>

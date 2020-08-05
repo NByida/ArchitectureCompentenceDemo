@@ -28,6 +28,7 @@ import com.gmail.xuyimin1994.architecturecompentencedemo.utils.ToastUtil
 
 
 class MainActivity : RvActivity() {
+     override var page=2
     override fun getLayoutId(): Int {
         return R.layout.activity_main
     }

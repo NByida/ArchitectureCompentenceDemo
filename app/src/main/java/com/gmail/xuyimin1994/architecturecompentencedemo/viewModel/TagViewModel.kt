@@ -3,25 +3,21 @@ package com.gmail.xuyimin1994.architecturecompentencedemo.viewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.gmail.xuyimin1994.architecturecompentencedemo.entity.BaseBean
+
+import com.gmail.xuyimin1994.architecturecompentencedemo.entity.TagWrap
 import com.gmail.xuyimin1994.architecturecompentencedemo.net.PoertyNet
 import kotlinx.coroutines.launch
 
-/**
- *com.gmail.xuyimin1994.architecturecompentencedemo.viewModel
- *yida
- *2019/11/13 0013
- **/
-class SearchViewModel:ViewModel() {
-    var weather = MutableLiveData<BaseBean>()
+class TagViewModel:ViewModel() {
+    var tags = MutableLiveData<TagWrap>()
 
-    fun getPoetryByTag(tag:String,page:Int){
+    fun getPoetryByTag(page:Int){
         launch({
-            weather.value= PoertyNet.getInstance().getPoetryUnderTag(tag,page)
+            tags.value= PoertyNet.getInstance().getAllTag(page)
         },{
-            var bean= BaseBean( -1)
+            var bean= TagWrap( -1)
             bean.msg= it.message!!
-            weather.value= bean
+            tags.value= bean
         }) }
 
     fun ViewModel.launch(block: suspend () -> Unit, error: (Throwable) -> Unit) = viewModelScope.launch {

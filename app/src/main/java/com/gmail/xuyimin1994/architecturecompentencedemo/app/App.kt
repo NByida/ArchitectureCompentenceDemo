@@ -6,14 +6,10 @@ import android.content.Context
 import androidx.multidex.MultiDexApplication
 import cn.jpush.android.api.JPushInterface
 import com.gmail.xuyimin1994.architecturecompentencedemo.R
-import com.scwang.smartrefresh.layout.footer.ClassicsFooter
-import com.scwang.smartrefresh.layout.api.RefreshLayout
-import com.scwang.smartrefresh.layout.api.RefreshFooter
-import com.scwang.smartrefresh.layout.api.DefaultRefreshFooterCreator
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
+import com.scwang.smartrefresh.layout.footer.ClassicsFooter
 import com.scwang.smartrefresh.layout.header.ClassicsHeader
-import com.scwang.smartrefresh.layout.api.RefreshHeader
-import com.scwang.smartrefresh.layout.api.DefaultRefreshHeaderCreator
+
 import com.umeng.analytics.MobclickAgent
 import com.umeng.commonsdk.UMConfigure
 

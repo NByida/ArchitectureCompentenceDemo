@@ -10,8 +10,8 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout
  *2019/9/24 0024
  **/
 abstract class RvActivity: BaseActivity() {
-    var page=1
-    lateinit var refreshLayout:SmartRefreshLayout
+    open var page=1
+    lateinit var refreshLayout: SmartRefreshLayout
 
     abstract fun pullData(page:Int)
 

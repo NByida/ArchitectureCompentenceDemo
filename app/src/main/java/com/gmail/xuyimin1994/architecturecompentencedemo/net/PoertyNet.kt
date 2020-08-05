@@ -1,7 +1,7 @@
 package com.gmail.xuyimin1994.architecturecompentencedemo.net
 
 import com.gmail.xuyimin1994.architecturecompentencedemo.app.App
-import com.gmail.xuyimin1994.architecturecompentencedemo.entity.BaseBean
+import com.gmail.xuyimin1994.architecturecompentencedemo.entity.*
 import com.gmail.xuyimin1994.architecturecompentencedemo.net.api.AddressService
 import com.gmail.xuyimin1994.architecturecompentencedemo.net.api.PoetryService
 import io.reactivex.Observable
@@ -58,6 +58,39 @@ class PoertyNet {
         var result:BaseBean= poertyService.getPoetryUnderTag(tagName,page).await()
         result
     }
+
+    suspend fun getAllTag(page:Int)= withContext(Dispatchers.IO){
+        var result:TagWrap= poertyService.getTags(page).await()
+        result
+    }
+
+    suspend fun getMingJu(page:Int)= withContext(Dispatchers.IO){
+        var result: WordWrap = poertyService.getMingju(page).await()
+        result
+    }
+
+
+    suspend fun getLabel(page:Int)= withContext(Dispatchers.IO){
+        var result: LabelWrap = poertyService.getLabel(page).await()
+        result
+    }
+
+    suspend fun getTypes(type:String)= withContext(Dispatchers.IO){
+        var result: Wrap<Type> = poertyService.getTypes(type,1).await()
+        result
+    }
+
+    suspend fun getMingJuByType(label:String,page:Int)= withContext(Dispatchers.IO){
+        var result: WordWrap = poertyService.getWordByType(label,page).await()
+        result
+    }
+
+
+
+
+
+
+
 
     companion object{
         private var net:PoertyNet?=null
