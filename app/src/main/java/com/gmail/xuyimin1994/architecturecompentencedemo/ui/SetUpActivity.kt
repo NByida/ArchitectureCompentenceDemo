@@ -3,6 +3,7 @@ package com.gmail.xuyimin1994.architecturecompentencedemo.ui
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.os.Debug
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity;
 import com.gmail.xuyimin1994.architecturecompentencedemo.BuildConfig
@@ -16,6 +17,7 @@ import java.util.concurrent.TimeUnit
 class SetUpActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        Debug.startMethodTracing()
         super.onCreate(savedInstanceState)
         if (Build.VERSION.SDK_INT >= 21) {
             val decorView = window.decorView

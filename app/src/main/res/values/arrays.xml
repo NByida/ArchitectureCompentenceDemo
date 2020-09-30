@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="color_value">
+        <item>50</item>
+        <item>100 </item>
+        <item>200</item>
+        <item> </item>
+        <item>600 </item>
+        <item>700</item>
+        <item>800</item>
+        <item>900 </item>
+        <item>A100</item>
+        <item>A200</item>
+        <item>A400 </item>
+        <item>A700</item>
+    </string-array>
+
+    <string-array name="color_name">
+        <item>Red</item>
+        <item>Pink </item>
+        <item>Purple</item>
+        <item>Purple_Deep</item>
+        <item>Indigo</item>
+        <item>Blue</item>
+        <item>Blue_Light</item>
+        <item>Cyan</item>
+        <item>Teal</item>
+        <item>Green</item>
+        <item>Green_Light</item>
+        <item>Lime</item>
+        <item>Yellow</item>
+        <item>Amber</item>
+        <item>Orange</item>
+        <item>Orange_Deep</item>
+        <item>Brown</item>
+        <item>Grey</item>
+        <item>Blue_Grey</item>
+    </string-array>
+</resources>

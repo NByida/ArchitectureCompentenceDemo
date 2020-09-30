@@ -3,11 +3,15 @@ package com.gmail.xuyimin1994.architecturecompentencedemo.ui
 import android.Manifest
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
+import android.os.Debug
+import android.util.Log
 import android.view.View
+import android.view.ViewGroup
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.ContextCompat
 import androidx.core.util.Pair
@@ -25,15 +29,14 @@ import com.gmail.xuyimin1994.architecturecompentencedemo.adapter.PoetryAdapter
 import com.gmail.xuyimin1994.architecturecompentencedemo.entity.BaseBean
 import com.gmail.xuyimin1994.architecturecompentencedemo.entity.Poetry
 import com.gmail.xuyimin1994.architecturecompentencedemo.entity.WordWrap
+import com.gmail.xuyimin1994.architecturecompentencedemo.event.ChangeColor
 import com.gmail.xuyimin1994.architecturecompentencedemo.event.GetWord
 import com.gmail.xuyimin1994.architecturecompentencedemo.event.Search
 import com.gmail.xuyimin1994.architecturecompentencedemo.ui.baseUi.RvActivity
 import com.gmail.xuyimin1994.architecturecompentencedemo.ui.dialog.ChooseWordsDialog
+import com.gmail.xuyimin1994.architecturecompentencedemo.ui.dialog.ColorDialog
 import com.gmail.xuyimin1994.architecturecompentencedemo.ui.search.SearchActivity
-import com.gmail.xuyimin1994.architecturecompentencedemo.utils.DisplayUtils
-import com.gmail.xuyimin1994.architecturecompentencedemo.utils.GlideEngine
-import com.gmail.xuyimin1994.architecturecompentencedemo.utils.ImageUtil
-import com.gmail.xuyimin1994.architecturecompentencedemo.utils.ToastUtil
+import com.gmail.xuyimin1994.architecturecompentencedemo.utils.*
 import com.gmail.xuyimin1994.architecturecompentencedemo.viewModel.MingJuViewModel
 import com.luck.picture.lib.PictureSelector
 import com.luck.picture.lib.config.PictureConfig
@@ -67,7 +70,27 @@ class MingJuActivity: RvActivity() {
         type=event.label
         page=1
         pullData(page)
+
     }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun change(event: ChangeColor) {
+      when(event.type){
+          1->{
+              ivImage.setImageDrawable(ColorDrawable(ContextCompat.getColor(this ,ColorUtlis.getIdByName(event.color))))
+          }
+          2->{
+              adapter.data.forEach {
+                  it.color=event.color
+              }
+              adapter.notifyDataSetChanged()
+          }
+      }
+    }
+
+
+
+
 
     override fun pullData(page: Int) {
         viewModel.getMingJu(page,type)
@@ -77,11 +100,10 @@ class MingJuActivity: RvActivity() {
         return R.layout.activity_mingju
     }
 
-    var dialog:ChooseWordsDialog?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        rv_auto.background=(ColorDrawable(ContextCompat.getColor(this ,R.color.a)))
+        ivImage.setImageDrawable(ColorDrawable(ContextCompat.getColor(this ,ColorUtlis.getIdByName("Red_300"))))
         viewModel = ViewModelProviders.of(this).get(MingJuViewModel::class.java)
         initObserver()
         parentCreated()
@@ -90,8 +112,10 @@ class MingJuActivity: RvActivity() {
         refreshLayout.setEnableLoadMore(false)
         refreshLayout.setEnableRefresh(false)
         btChange.setOnClickListener {
+            var dialog:ChooseWordsDialog?=null
             if(dialog==null){
                 dialog=ChooseWordsDialog()
+
             }
             dialog?.show(supportFragmentManager)
         }
@@ -109,6 +133,26 @@ class MingJuActivity: RvActivity() {
                         }
                     }
         }
+        save.setOnClickListener {
+            savePicture(layparent)
+        }
+        color.setOnClickListener {54
+            var colorDialog=ColorDialog.newDialog(1)
+            colorDialog.show(supportFragmentManager)
+        }
+        textColor.setOnClickListener {
+            var colorDialog=ColorDialog.newDialog(2)
+            colorDialog.show(supportFragmentManager)
+        }
+        var visiable=true
+        adapter.setOnItemClickListener { adapter, view, position ->
+            if(visiable){
+                layOperate.visibility= View.GONE
+            }else layOperate.visibility= View.VISIBLE
+            visiable=!visiable
+        }
+        Debug.stopMethodTracing()
+
     }
 
     var pullTime=0L
@@ -167,7 +211,8 @@ class MingJuActivity: RvActivity() {
                     override fun onResult(result: List<LocalMedia>) {
                         // onResult Callback
                         result?.get(0)?.let {
-                            rv_auto.background=BitmapDrawable(ImageUtil.getImageBitmap(it.realPath, DisplayUtils.getScreenWidth(this@MingJuActivity).toFloat(),DisplayUtils.getScreenHeight(this@MingJuActivity).toFloat()))
+//                            rv_auto.background=BitmapDrawable(ImageUtil.getImageBitmap(it.realPath, DisplayUtils.getScreenWidth(this@MingJuActivity).toFloat(),DisplayUtils.getScreenHeight(this@MingJuActivity).toFloat()))
+                            ivImage.setImageDrawable(BitmapDrawable(ImageUtil.getImageBitmap(it.realPath, DisplayUtils.getScreenWidth(this@MingJuActivity).toFloat(),DisplayUtils.getScreenHeight(this@MingJuActivity).toFloat())))
                         }
                     }
 
@@ -175,6 +220,31 @@ class MingJuActivity: RvActivity() {
                         // onCancel Callback
                     }
                 })
+    }
+
+    private fun savePicture(imPost:ViewGroup) {
+        layOperate.visibility=View.INVISIBLE
+        try {
+            imPost.buildDrawingCache()  //启用DrawingCache并创建位图
+            val bitmap = Bitmap.createBitmap(imPost.getDrawingCache()) //创建一个DrawingCache的拷贝，因为DrawingCache得到的位图在禁用后会被回收
+            val rxPermissions = RxPermissions(this)
+            rxPermissions.request(
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    Manifest.permission.READ_EXTERNAL_STORAGE)
+                    .subscribe { granted ->
+                        if (granted) {
+                            ImageUtil.saveBitmap2File(bitmap, this, "shareImage"+System.currentTimeMillis(), true)
+                        } else {
+                            ToastUtil.toastUtil.Short(this,"请授予权限")
+                        }
+                        layOperate.visibility=View.VISIBLE
+                    }
+            imPost.setDrawingCacheEnabled(false)
+        } catch (e: Exception) {
+            Log.e("",e.message)
+            layOperate.visibility=View.VISIBLE
+        }
+
     }
 
 

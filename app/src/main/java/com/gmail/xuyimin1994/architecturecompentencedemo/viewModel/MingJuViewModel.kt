@@ -3,15 +3,16 @@ package com.gmail.xuyimin1994.architecturecompentencedemo.viewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.gmail.xuyimin1994.architecturecompentencedemo.entity.LabelWrap
-import com.gmail.xuyimin1994.architecturecompentencedemo.entity.Type
-import com.gmail.xuyimin1994.architecturecompentencedemo.entity.WordWrap
-import com.gmail.xuyimin1994.architecturecompentencedemo.entity.Wrap
+import com.gmail.xuyimin1994.architecturecompentencedemo.app.App
+import com.gmail.xuyimin1994.architecturecompentencedemo.app.App.Companion.context
+import com.gmail.xuyimin1994.architecturecompentencedemo.entity.*
 import com.gmail.xuyimin1994.architecturecompentencedemo.net.PoertyNet
+import com.gmail.xuyimin1994.architecturecompentencedemo.utils.SharedPreferenceUtil
 import kotlinx.coroutines.launch
 
 class MingJuViewModel:ViewModel() {
     var mingJu = MutableLiveData<WordWrap>()
+
     var type = MutableLiveData<Wrap<Type>>()
     var label = MutableLiveData<LabelWrap>()
 
@@ -48,10 +49,13 @@ class MingJuViewModel:ViewModel() {
 
     fun getType(id:String){
         launch({
-            type.value= PoertyNet.getInstance().getTypes(id)
+            var warp=PoertyNet.getInstance().getTypes(id)
+            warp.msg=id
+            type.value=warp
         },{
             var bean= Wrap<Type>( -1)
-            bean.msg= it.message!!
+            bean.msg= id
             type.value= bean
+
         })}
 }

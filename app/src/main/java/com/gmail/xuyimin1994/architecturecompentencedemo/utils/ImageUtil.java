@@ -1,18 +1,28 @@
 package com.gmail.xuyimin1994.architecturecompentencedemo.utils;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
+import android.media.MediaScannerConnection;
+import android.net.Uri;
 import android.os.Environment;
 import android.text.TextUtils;
+import android.util.Log;
 
+
+import com.gmail.xuyimin1994.architecturecompentencedemo.app.App;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 public class ImageUtil {
 
@@ -312,6 +322,74 @@ public class ImageUtil {
 
     public static boolean isGifImageWithUrl(String url) {
         return url.toLowerCase().endsWith("gif");
+    }
+    private final static String dir = "yida";
+
+    /**
+     * 获取cacha 目录
+     * @param type
+     * @return
+     */
+    public static  String getStoryDir(String type){
+        return Environment.getExternalStorageDirectory()+ File.separator+ dir + File.separator + type;
+
+    }
+
+    @SuppressLint("CheckResult")
+    public static File saveBitmap2File(Bitmap toTransform, Context context, String title,boolean visiable2user){
+        final File[] file = new File[1];
+        Observable.create(e -> e.onNext(toTransform))
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .filter((b)-> Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED))
+                .flatMap(bitmap -> {
+                    File appDir;
+                    File PICTURES = App.context.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+                            if(visiable2user){
+                                appDir = new File(getStoryDir("downImage"));
+                            }else {
+                                appDir = new File(getStoryDir(".cache"));
+                            }
+                    if (!appDir.exists()) {
+                        boolean mkdir = appDir.mkdirs();
+                        if (!mkdir) return Observable.just(Uri.EMPTY);
+                    }
+                    String fileName = title.replace('/', '-') + ".jpg";
+                    file[0] = new File(appDir, fileName);
+                    Log.e("path",file[0].getAbsolutePath());
+                    try {
+                        FileOutputStream outputStream = new FileOutputStream(file[0]);
+                        assert bitmap != null;
+                        ((Bitmap)bitmap).compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+                        outputStream.flush();
+                        outputStream.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        Log.e("path",e.getMessage());
+                    }
+                    // 保存后要扫描一下文件，及时更新到系统目录（一定要加绝对路径，这样才能更新）
+                    MediaScannerConnection.scanFile(context, new String[] {
+                            appDir
+                                    + File.separator
+                                    + fileName
+                    }, null, null);
+                    Uri uri = Uri.fromFile(file[0]);
+//                    return Observable.just(uri);
+                    return  Observable.just(file[0].exists());
+                }
+                ).subscribeOn(Schedulers.io())
+                .subscribe(a->{
+//                    if((Boolean) a){
+                        ToastUtil.Companion.showToast(context,"保存成功");
+//                    }else {
+//                        ToastUtil.Companion.showToast(context,"保存失败");
+//                    }
+                },e-> {
+                    if(visiable2user){
+                        ToastUtil.Companion.showToast(context,"保存失败"+e.getMessage());
+                    }
+                });
+        return file[0];
     }
 
 

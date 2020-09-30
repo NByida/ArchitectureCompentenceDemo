@@ -6,12 +6,22 @@
     android:background="@color/transpant"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+
     <FrameLayout
+        android:id="@+id/layparent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/transpant"
-
         >
+
+        <ImageView
+            android:id="@+id/ivImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@color/a"
+            />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_auto"
             android:background="@color/transpant"
@@ -21,27 +31,63 @@
             android:overScrollMode="never"
             />
 
-        <ImageView
-            android:id="@+id/btChange"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@color/white"
-            android:foregroundGravity="right"
-            android:layout_gravity="right|bottom"
-            android:layout_marginRight="24dp"
-            android:layout_marginBottom="24dp"
-            />
 
-        <ImageView
-            android:id="@+id/btChangePic"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@color/white"
-            android:foregroundGravity="right"
-            android:layout_gravity="left|bottom"
-            android:layout_marginLeft="24dp"
-            android:layout_marginBottom="24dp"
-            />
+
+
+
+        <LinearLayout
+            android:id="@+id/layOperate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="bottom"
+            android:paddingBottom="30dp"
+            >
+            <ImageView
+                android:id="@+id/color"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="30dp"
+                android:src="@mipmap/bgcolor"
+                />
+            <ImageView
+                android:id="@+id/btChange"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="30dp"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:src="@mipmap/word"
+                />
+
+            <ImageView
+                android:id="@+id/btChangePic"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="30dp"
+                android:src="@mipmap/pic"
+
+                />
+
+            <ImageView
+                android:id="@+id/save"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="30dp"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:src="@mipmap/down2"
+                />
+
+            <ImageView
+                android:id="@+id/textColor"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="30dp"
+                android:src="@mipmap/textcolor"
+                />
+
+        </LinearLayout>
     </FrameLayout>
 
 

@@ -14,3 +14,4 @@ ktlint
 /release/config.pyc
 /release/jiagu/log
 /release/jiagu/output
+/keystore.properties

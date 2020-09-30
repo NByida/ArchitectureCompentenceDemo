@@ -265,3 +265,5 @@ public static final int *;
 
 #Okio
 -dontwarn org.codehaus.mojo.animal_sniffer.*
+
+-dontwarn okhttp3.com.gmail.xuyimin1994.**

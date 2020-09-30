@@ -46,15 +46,6 @@
         <activity android:name=".ui.search.SearchActivity"/>
         <activity android:name=".ui.MingJuActivity"/>
 
-        <receiver
-            android:name=".utils.JPushReceiver"
-            android:enabled="true"
-            android:exported="false" >
-            <intent-filter>
-                <action android:name="cn.jpush.android.intent.RECEIVE_MESSAGE" />
-                <category android:name="com.gmail.xuyimin1994.architecturecompentencedemo" />
-            </intent-filter>
-        </receiver>
 
         <meta-data
         tools:replace="android:value"
@@ -64,6 +55,18 @@
         <meta-data
             android:name="android.max_aspect"
             android:value="2.4" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities=".fileProvider"
+            android:grantUriPermissions="true"
+            tools:replace="android:authorities"
+            android:exported="false">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths"/>
+        </provider>
+
 
 
     </application>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_width="60dp"
+    android:layout_height="60dp">
+
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="8dp"
+        android:background="@color/a"
+        app:cardCornerRadius="50dp">
+    <com.gmail.xuyimin1994.architecturecompentencedemo.ui.customeView.RoundImageView
+        android:id="@+id/circle"
+        android:layout_centerInParent="true"
+        android:layout_gravity="bottom"
+        android:layout_width="match_parent"
+        android:src="@color/a"
+        android:layout_height="match_parent"
+        app:is_circle="true"
+        app:corner_radius="50dp"
+        />
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>
