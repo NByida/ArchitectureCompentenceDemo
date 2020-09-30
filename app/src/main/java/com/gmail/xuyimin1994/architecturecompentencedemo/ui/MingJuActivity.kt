@@ -153,8 +153,6 @@ class MingJuActivity: RvActivity() {
             }else layOperate.visibility= View.VISIBLE
             visiable=!visiable
         }
-        Debug.stopMethodTracing()
-
     }
 
     var pullTime=0L

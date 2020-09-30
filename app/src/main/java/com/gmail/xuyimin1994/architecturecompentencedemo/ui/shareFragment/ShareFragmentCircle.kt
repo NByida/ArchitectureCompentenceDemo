@@ -75,25 +75,15 @@ class ShareFragmentCircle:BaseFragment() {
         save.setOnClickListener {  BitMapUtils.savePicture(requireActivity(),laySave) }
         setWord(mWord)
     }
-
+//    【浣溪沙】<br><br>谁念西风独自凉<br>萧萧黄叶闭疏窗<br>沉思往事立残阳<br><br>被酒莫惊春睡重<br>赌书消得泼茶香<br>当时只道是寻常<br><br>
     fun setWord(item: Word?){
-        item?.code.let {
-            if(it==-1){
-                tv2.text=StringUtils.getText(item!!.words)
-                tv1.isVisible=false
-                return
-            }
-        }
         item?.words?.let{
-            val strArray=it.split("，")
-            if(strArray.size==2){
-                tv1.text=strArray[0]
-                tv2.text=strArray[1]
-                tv1.isVisible=true
-            }else{
-                tv2.text=it
-                tv1.isVisible=false
-            }
+            val strArray=it
+                    .replace("<br><br>","<br>")
+                    .replace("【","<br>")
+                    .replace("】","<br>")
+                    .split("，","。","!","?","，","？","<br>")
+            poetyView.setStringArray(strArray)
         }
     }
 
@@ -101,8 +91,10 @@ class ShareFragmentCircle:BaseFragment() {
     fun change(event: ChangeColor) {
         when(event.type){
             3->{
-                tv1.setTextColor(ContextCompat.getColor(requireContext() , ColorUtlis.getIdByName(event.color)))
-                tv2.setTextColor(ContextCompat.getColor(requireContext() , ColorUtlis.getIdByName(event.color)))
+                poetyView.setColor(ContextCompat.getColor(requireContext() , ColorUtlis.getIdByName(event.color)))
+            }
+            4->{
+                laySave.setBackgroundColor(ContextCompat.getColor(requireContext() , ColorUtlis.getIdByName(event.color)))
             }
         }
     }

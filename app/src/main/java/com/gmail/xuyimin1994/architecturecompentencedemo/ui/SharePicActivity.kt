@@ -33,6 +33,10 @@ class SharePicActivity : BaseActivity() {
             var colorDialog= ColorDialog.newDialog(3)
             colorDialog.show(supportFragmentManager)
         }
+        tvBgColor.setOnClickListener {
+            var colorDialog= ColorDialog.newDialog(4)
+            colorDialog.show(supportFragmentManager)
+        }
     }
 
     fun initViewPager(){

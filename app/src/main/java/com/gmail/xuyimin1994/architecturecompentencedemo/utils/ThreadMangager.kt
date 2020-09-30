@@ -16,24 +16,29 @@ object ThreadMangager {
 
     var handler:Handler= Handler(Looper.getMainLooper())
 
-    fun excuteMain(delay:Long=0,task:Runnable){
-        handler.postDelayed(task,delay)
-    }
 
     fun excuteMain(task:Runnable,delay:Long=0){
         handler.postDelayed(task,delay)
     }
 
+    fun excuteMain(run:()->Unit,delay:Long=0){
+        handler.postDelayed(object :Runnable{
+            override fun run() {
+                run()
+            }
+        },delay)
+    }
+
     fun excuteIo(task:Runnable,delay:Long=0){
-        excuteMain(delay, Runnable {
+        excuteMain( Runnable {
             io_ThreadPool.execute(task)
         })
     }
 
     fun excuteCalculate(task:Runnable,delay:Long=0){
-        excuteMain(delay, Runnable {
+        excuteMain( Runnable {
             caculate_ThreadPool.execute(task)
-        })
+        },delay)
     }
 
 

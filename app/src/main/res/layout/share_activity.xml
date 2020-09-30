@@ -11,18 +11,30 @@
         android:layout_weight="1"
         />
 
-    <RelativeLayout
+    <LinearLayout
         android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:gravity="center"
         >
         <TextView
             android:id="@+id/tvChangeColor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="选色"
+            android:text="文字颜色"
             android:layout_centerInParent="true"
             android:padding="4dp"
             />
-    </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tvBgColor"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="底色"
+            android:layout_centerInParent="true"
+            android:padding="4dp"
+            />
+    </LinearLayout>
 </LinearLayout>
