@@ -82,8 +82,9 @@ class MainActivity : RvActivity() {
             val pair = Pair<View, String>(view.findViewById(R.id.tv_title), "name")
             val pair2 = Pair<View, String>( view.findViewById(R.id.tv_name)!!, "auth")
             val pair3 = Pair<View, String>(view.findViewById(R.id.context)!!, "context")
-            val optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(this, pair,pair2,pair3)
-            PoetryDetailActivity.startMe(this@MainActivity, a.getItem(p) as Poetry,optionsCompat)
+//            val optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(this, pair,pair2,pair3)
+//            PoetryDetailActivity.startMe(this@MainActivity, a.getItem(p) as Poetry,optionsCompat)
+            PoetryDetailActivity.startMe(this@MainActivity, a.getItem(p) as Poetry)
          }
         tv_search.setOnClickListener {
             SearchActivity.startMe(this)

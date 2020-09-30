@@ -26,6 +26,7 @@ import com.gmail.xuyimin1994.architecturecompentencedemo.app.App
 import com.gmail.xuyimin1994.architecturecompentencedemo.entity.Poetry
 import com.gmail.xuyimin1994.architecturecompentencedemo.enums.SearchType
 import com.gmail.xuyimin1994.architecturecompentencedemo.event.Search
+import com.gmail.xuyimin1994.architecturecompentencedemo.ui.MingJuActivity
 import com.gmail.xuyimin1994.architecturecompentencedemo.ui.baseUi.BaseActivity
 import com.gmail.xuyimin1994.architecturecompentencedemo.ui.baseUi.RvActivity
 import com.gmail.xuyimin1994.architecturecompentencedemo.utils.Constants.SEARCH_WORD
@@ -75,6 +76,10 @@ class SearchActivity: BaseActivity() {
         delete.setOnClickListener {
             edit_search.setText("")
             lay_recommend.visibility= VISIBLE
+        }
+
+        tvMingju.setOnClickListener {
+              MingJuActivity.startMe(this)
         }
 
         edit_search.addTextChangedListener(object : TextWatcher {

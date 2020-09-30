@@ -23,6 +23,7 @@ class ColorDialog :BaseDialog(R.layout.dialog_choose_color){
     /**
      * 1-->背景
      * 2-->文字
+     * 3-->配图
      */
     companion object {
         var type:Int=1

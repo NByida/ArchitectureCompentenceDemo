@@ -103,7 +103,6 @@ class MingJuActivity: RvActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        ivImage.setImageDrawable(ColorDrawable(ContextCompat.getColor(this ,ColorUtlis.getIdByName("Red_300"))))
         viewModel = ViewModelProviders.of(this).get(MingJuViewModel::class.java)
         initObserver()
         parentCreated()
@@ -120,6 +119,9 @@ class MingJuActivity: RvActivity() {
             dialog?.show(supportFragmentManager)
         }
         btChangePic.setOnClickListener {
+            //test
+            SharePicActivity.startMe(context = this,word = adapter.data.get(manager!!.findFirstVisibleItemPosition()))
+            return@setOnClickListener
             var  rxPermissions =  RxPermissions(this@MingJuActivity)
             rxPermissions.request(
                     Manifest.permission.CAMERA,
@@ -156,8 +158,9 @@ class MingJuActivity: RvActivity() {
     }
 
     var pullTime=0L
+    var manager:LinearLayoutManager?=null
     fun initRv(){
-        var manager= LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false)
+        manager= LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false)
         rv_auto.layoutManager=manager
         adapter= MingjuAdapter()
         var snapHelper=PagerSnapHelper()
@@ -167,7 +170,7 @@ class MingJuActivity: RvActivity() {
             rv_auto.addOnScrollListener( object:OnScrollListener() {
                 override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                     super.onScrollStateChanged(recyclerView, newState)
-                    if(newState==SCROLL_STATE_IDLE&&(adapter.getData().size - manager.findFirstVisibleItemPosition() <= 3)){
+                    if(newState==SCROLL_STATE_IDLE&&(adapter.getData().size - manager!!.findFirstVisibleItemPosition() <= 3)){
                         if(System.currentTimeMillis()-pullTime>3000){
                             pullData(++page)
                             pullTime=System.currentTimeMillis()
@@ -244,7 +247,6 @@ class MingJuActivity: RvActivity() {
             Log.e("",e.message)
             layOperate.visibility=View.VISIBLE
         }
-
     }
 
 

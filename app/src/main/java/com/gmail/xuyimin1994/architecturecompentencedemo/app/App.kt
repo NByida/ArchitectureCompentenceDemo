@@ -3,6 +3,7 @@ package com.gmail.xuyimin1994.architecturecompentencedemo.app
 import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
+import android.graphics.Typeface
 import androidx.multidex.MultiDexApplication
 import com.gmail.xuyimin1994.architecturecompentencedemo.R
 import com.scwang.smartrefresh.layout.SmartRefreshLayout

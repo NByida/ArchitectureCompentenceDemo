@@ -96,6 +96,29 @@
             android:orientation="vertical"
             >
 
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                app:cardCornerRadius="5dp"
+                app:cardMaxElevation="10dp"
+                android:layout_margin="20dp"
+                >
+
+                <com.gmail.xuyimin1994.architecturecompentencedemo.ui.customeView.TypeFaceTextView
+                    android:id="@+id/tvMingju"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text="经典名句"
+                    android:textSize="20sp"
+                    >
+
+                </com.gmail.xuyimin1994.architecturecompentencedemo.ui.customeView.TypeFaceTextView>
+
+
+            </androidx.cardview.widget.CardView>
+
             <RelativeLayout
                 android:id="@+id/lay_history"
                 android:layout_width="match_parent"

@@ -114,6 +114,34 @@
             app:cardCornerRadius="4dp"
             >
             <RelativeLayout
+                android:id="@+id/layShare"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="50dp"
+                >
+
+                <com.gmail.xuyimin1994.architecturecompentencedemo.ui.customeView.TypeFaceTextView
+                    android:id="@+id/tvShare"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorAccent"
+                    android:layout_gravity="center"
+                    android:text="分享" />
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:elevation="3dp"
+            android:translationZ="3dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            app:cardCornerRadius="4dp"
+            >
+            <RelativeLayout
                 android:id="@+id/lay_content"
                 android:layout_width="match_parent"
                 android:gravity="center"

@@ -1,0 +1,26 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="375dp"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/transpant"
+    android:padding="@dimen/widget_margin">
+
+    <TextView
+        android:id="@+id/appwidget_text"
+        android:layout_width="275dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_margin="8dp"
+        android:gravity="center"
+        android:background="@drawable/bg_weidget"
+        android:contentDescription="@string/appwidget_text"
+        android:text="@string/appwidget_text"
+        tools:text="粗织大布裹生涯\n腹有诗书气自华"
+        android:lineSpacingExtra="6.5dp"
+        android:textColor="@color/d"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+</RelativeLayout>

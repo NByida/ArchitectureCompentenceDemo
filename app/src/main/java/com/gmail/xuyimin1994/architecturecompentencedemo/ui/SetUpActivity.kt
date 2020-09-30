@@ -29,9 +29,8 @@ class SetUpActivity : AppCompatActivity() {
                 .filter {it==1L}
                 .takeUntil{it==1L}
                 .subscribe{
-//                    MainActivity.startMe(this)
-                    MingJuActivity.startMe(this)
-
+                    MainActivity.startMe(this)
+//                    MingJuActivity.startMe(this)
                 }
         text.text=getString(R.string.app_name)+BuildConfig.VERSION_NAME
     }

@@ -22,7 +22,8 @@
             android:orientation="vertical"
             android:layout_margin="19dp"
             >
-            <com.gmail.xuyimin1994.architecturecompentencedemo.ui.customeView.TypeFaceTextView
+            <TextView
+
                 android:id="@+id/tv_title"
                 android:layout_width="wrap_content"
                 android:gravity="center"
@@ -37,7 +38,8 @@
                 />
 
 
-            <com.gmail.xuyimin1994.architecturecompentencedemo.ui.customeView.TypeFaceTextView
+            <TextView
+
                 android:id="@+id/tv_name"
                 android:layout_below="@id/tv_title"
                 android:layout_centerHorizontal="true"
@@ -52,7 +54,7 @@
                 android:text="杜甫"
                 />
 
-            <com.gmail.xuyimin1994.architecturecompentencedemo.ui.customeView.TypeFaceTextView
+            <TextView
                 android:id="@+id/context"
                 android:layout_below="@+id/tv_name"
                 android:layout_centerHorizontal="true"

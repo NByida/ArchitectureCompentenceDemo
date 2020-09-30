@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.gmail.xuyimin1994.architecturecompentencedemo.adapter.RecommendAdapter
 import com.gmail.xuyimin1994.architecturecompentencedemo.entity.BaseBean
+import com.gmail.xuyimin1994.architecturecompentencedemo.entity.Word
 import com.gmail.xuyimin1994.architecturecompentencedemo.utils.ToastUtil
 import com.gmail.xuyimin1994.architecturecompentencedemo.viewModel.PoetryDeatilViewModel
 
@@ -31,8 +32,8 @@ class PoetryDetailActivity:BaseActivity() {
 
     lateinit var poetry:Poetry
     companion object {
-        fun startMe(context: Activity, poetry:Poetry,activityOptionsCompat:ActivityOptionsCompat){
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+        fun startMe(context: Activity, poetry:Poetry,activityOptionsCompat:ActivityOptionsCompat?=null){
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN&&activityOptionsCompat!=null) {
                 context.startActivity(Intent(context,PoetryDetailActivity::class.java).putExtra("poetry",poetry),activityOptionsCompat.toBundle())
             }else{
                 context.startActivity(Intent(context,PoetryDetailActivity::class.java).putExtra("poetry",poetry))
@@ -68,6 +69,17 @@ class PoetryDetailActivity:BaseActivity() {
         if(poetry.appreciation!!.length<5&&poetry.notes!!.length<5&&poetry.translate!!.length<5){
             lay_content.visibility= GONE
         }
+        layShare.setOnClickListener {
+            SharePicActivity.startMe(this, Word(poetry.poetId.toString()
+                    ,"","",""
+                    ,poetry.content?:""
+                    ,name =poetry.name?:""
+                    ,poet = poetry.poet?:""
+                    ,linkId = ""
+            ,code = -1
+                        ))
+        }
+
         lay_content.setOnClickListener {context.text=poetry.getText()
             tv_content.setTextColor(resources.getColor(R.color.colorAccent))
             tv_trans.setTextColor(resources.getColor(R.color.black))

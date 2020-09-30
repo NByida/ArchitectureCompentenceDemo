@@ -4,7 +4,7 @@ import android.content.Context
 import android.graphics.Typeface
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatTextView
-import com.gmail.xuyimin1994.architecturecompentencedemo.R
+import com.gmail.xuyimin1994.architecturecompentencedemo.app.App
 
 /**
  *com.gmail.xuyimin1994.architecturecompentencedemo.ui.customeView
@@ -13,15 +13,14 @@ import com.gmail.xuyimin1994.architecturecompentencedemo.R
  **/
 class TypeFaceTextView(context: Context?, attrs: AttributeSet?) : AppCompatTextView(context, attrs) {
 
-//    init {
-//        val ta = context?.obtainStyledAttributes(attrs, R.styleable.TypeFaceTextView, 0, 0)
-//        var path:String?=ta?.getString( R.styleable.TypeFaceTextView_TypeFace_name)
-//        ta?.recycle()
-//        val typeFaceHold = Typeface.createFromAsset(context?.assets, if(path==null){
-//            "fonts/xing_kai.ttf"
-//        }else{
-//            "fonts/"+path+".ttf"
-//        })
-//        typeface=typeFaceHold
-//    }
+    companion object {
+        var typeFaceHold: Typeface? = null
+        init {
+            typeFaceHold = Typeface.createFromAsset(App.context.assets, "fonts/wyue.otf")
+        }
+    }
+
+    init {
+        typeface = typeFaceHold
+    }
 }

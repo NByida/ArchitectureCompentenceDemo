@@ -12,13 +12,13 @@
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
-
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
 
     <application
         android:name=".app.App"
@@ -29,29 +29,54 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <receiver android:name=".widget.NewAppWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/new_app_widget_info" />
+        </receiver>
+
         <activity
             android:name=".ui.SetUpActivity"
             android:noHistory="true"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.MainActivity" />
+        <activity android:name=".ui.PoetryDetailActivity" />
+        <activity android:name=".ui.search.SearchActivity" />
+        <activity android:name=".ui.MingJuActivity" />
+        <activity android:name=".ui.SharePicActivity" />
 
-        <activity android:name=".ui.MainActivity"/>
-        <activity android:name=".ui.PoetryDetailActivity"/>
-        <activity android:name=".ui.search.SearchActivity"/>
-        <activity android:name=".ui.MingJuActivity"/>
 
+        <receiver
+            android:name=".utils.JPushReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.RECEIVE_MESSAGE" />
+
+                <category android:name="com.gmail.xuyimin1994.architecturecompentencedemo" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name=".widget.WeidgetService"
+            />
 
         <meta-data
-        tools:replace="android:value"
-        android:name="JPUSH_APPKEY"
-        android:value="035743bbeada01cb0e83848d" />
-
+            android:name="JPUSH_APPKEY"
+            android:value="035743bbeada01cb0e83848d"
+            tools:replace="android:value" />
         <meta-data
             android:name="android.max_aspect"
             android:value="2.4" />
@@ -70,7 +95,5 @@
 
 
     </application>
-
-
 
 </manifest>

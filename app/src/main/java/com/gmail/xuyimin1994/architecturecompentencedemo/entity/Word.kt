@@ -27,7 +27,8 @@ data class Word(var id:String,
                  var name:String,
                  var poet:String,
                  var linkId:String,
-                 var color:String=""
+                 var color:String="",
+                    var code:Int=0
 )
 
 data class Label( var label_name:String,var id:String)
