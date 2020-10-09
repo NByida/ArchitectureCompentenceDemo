@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit
 class SetUpActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        Debug.startMethodTracing()
+//        Debug.startMethodTracing()
         super.onCreate(savedInstanceState)
         if (Build.VERSION.SDK_INT >= 21) {
             val decorView = window.decorView
