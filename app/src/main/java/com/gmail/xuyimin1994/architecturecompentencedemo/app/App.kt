@@ -24,9 +24,9 @@ class App: MultiDexApplication() {
     override fun onCreate() {
         super.onCreate()
         context=this
-        UMConfigure.init(this, "5dadbaaf4ca357c215000020", "Umeng", UMConfigure.DEVICE_TYPE_PHONE, null)
-        // 选用AUTO页面采集模式
-        MobclickAgent.setPageCollectionMode(MobclickAgent.PageMode.AUTO)
+//        UMConfigure.init(this, "5dadbaaf4ca357c215000020", "Umeng", UMConfigure.DEVICE_TYPE_PHONE, null)
+//         选用AUTO页面采集模式
+//        MobclickAgent.setPageCollectionMode(MobclickAgent.PageMode.AUTO)
     }
 
     companion object{
